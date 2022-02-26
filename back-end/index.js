@@ -26,7 +26,8 @@ app.get('/',(req,res)=>{
 //Importar rutas
 app.use('/api/user', require('./routes/user'))
 app.use('/api/auth', require('./routes/auth'))
-//app.use('/api/proyectos', require('./routes/proyectos'))
+app.use('/api/activity', require('./routes/activity'))
+app.use('/api/team', require('./routes/team'))
 //app.use('/api/tareas', require('./routes/tareas'))
 
 //Arrancar la app

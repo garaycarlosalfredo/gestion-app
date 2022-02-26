@@ -16,12 +16,12 @@ exports.signIn = async (req,res)=>{
 
     try {
         //Revisar que sea un usuario registrado
-        let usuario = await User.findOne({email})
-        if(!usuario){
+        let user = await User.findOne({email})
+        if(!user){
             return res.status(400).json({msg: 'El usuario no existe'})
         }
 
-        const passCorrecto = await bcryptjs.compare(password, usuario.password)
+        const passCorrecto = await bcryptjs.compare(password, user.password)
 
         if(!passCorrecto){
             return res.status(400).json({msg: 'password incorrecto'})
@@ -30,8 +30,8 @@ exports.signIn = async (req,res)=>{
         //Si es todo correcto creo el jwt
         //Crear y firmar el jwt
         const payload = {
-            usuario:{
-                id: usuario.id
+            user:{
+                id: user.id
             }
         }
 
@@ -40,21 +40,14 @@ exports.signIn = async (req,res)=>{
                 expiresIn: 3600 //1 hora
             },(error, token)=>{
                 if(error)throw error
-
                 //mensaje de confirmación
                 console.log("Usuario creado correctamente")
                 return res.json({token})
-
             }
         )
-    
-    
     } catch (error) {
         console.log(error)
     }
-
-    
-
 }
 
 
@@ -63,8 +56,8 @@ exports.signIn = async (req,res)=>{
 
 exports.actualUser = async (req,res)=>{
     try {
-        const usuario = await User.findById(req.usuario.id).select('-password')
-        res.json({usuario})
+        const user = await User.findById(req.user.id).select('-password')
+        res.json({user})
     } catch (error) {
         console.log(error)
         res.status(500).json({msg: 'Hubo un error'})

@@ -2,18 +2,29 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import { BrowserRouter as Router, Route ,Routes ,Navigate} from 'react-router-dom';
+
+//Redux 
+import {Provider} from 'react-redux'
+import store from './redux/store/store'
+//My Components
+import ResponsiveAppBar from './components/layout/ResponsiveAppBar';
+import Main from './components/views/Main'
+import Default from './components/views/Default'
+
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Router>
+        <Provider store = {store}>
+          <ResponsiveAppBar></ResponsiveAppBar>
+          <Routes>
+            <Route exact path="/main" element={<Main/>}/> 
+            <Route path="/home" element={<Default/>}/> 
+            <Route path="*" element={<Navigate to="/home"/>}/>
+          </Routes>
+        </Provider>
+      </Router>
     );
   }
 }

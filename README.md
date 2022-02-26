@@ -1,2 +1,6 @@
 # gestion-app
-gestion de turnos y procesos
+gestion de actividades
+
+back-end en NodeJs
+front-end en ReactJs
+Base de datos MongoDB

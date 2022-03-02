@@ -17,10 +17,18 @@ import MenuItem from '@mui/material/MenuItem';
 import Signin from './Dialog/Signin';
 import Signup from './Dialog/Signup';
 
+//Imports Redux
+import {useDispatch, useSelector} from 'react-redux'
+
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const ResponsiveAppBar = () => {
+  //Redux
+    //Leer del store
+  //const userActual = useSelector(state)
+  //console.log('Header userActual = ', userActual)
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 

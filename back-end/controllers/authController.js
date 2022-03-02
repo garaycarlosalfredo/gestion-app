@@ -18,7 +18,7 @@ exports.signIn = async (req,res)=>{
         //Revisar que sea un usuario registrado
         let user = await User.findOne({email})
         if(!user){
-            return res.status(400).json({msg: 'El usuario no existe'})
+            return res.status(400).json({msg: 'No se encontró el usuario'})
         }
 
         const passCorrecto = await bcryptjs.compare(password, user.password)
@@ -41,7 +41,7 @@ exports.signIn = async (req,res)=>{
             },(error, token)=>{
                 if(error)throw error
                 //mensaje de confirmación
-                console.log("Usuario creado correctamente")
+                console.log("Usuario iniciado correctamente")
                 return res.json({token})
             }
         )

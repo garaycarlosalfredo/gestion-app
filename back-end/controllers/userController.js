@@ -5,10 +5,10 @@ const jwt = require('jsonwebtoken')
 
 exports.signUp = async(req,res)=>{
     //revisar si hay errores
-    const errores = validationResult(req)
+    const errors = validationResult(req)
     
-    if(!errores.isEmpty()){
-        return res.status(400).json({errores: errores.array()})
+    if(!errors.isEmpty()){
+        return res.status(400).json({errors: errors.array()})
     }
     //Extraer email y password
     const {email, password} = req.body

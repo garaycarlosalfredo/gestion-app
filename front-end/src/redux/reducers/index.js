@@ -6,6 +6,7 @@ import vehiculoSeleccionadoReducer from './vehiculoSeleccionadoReducer'
 import zonaSeleccionadoReducer from './zonaSeleccionadoReducer'
 import garageSeleccionadoReducer from './garageSeleccionadoReducer'
 import stateReducer from './stateReducer'*/
+import userReducer from './userReducer'
 
 
 export default combineReducers({
@@ -17,4 +18,5 @@ export default combineReducers({
     zonaSeleccionado : zonaSeleccionadoReducer,    
     garageSeleccionado : garageSeleccionadoReducer,
     stateActions : stateReducer,*/
+    userStore : userReducer,
 })

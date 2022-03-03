@@ -69,8 +69,10 @@ const Signin = () => {
         return
       }
       
+      localStorage.setItem('token',response.token)
       //const userLocal = setlocalUser(response.token);//Guarda el usuario en localStorage
       const userActual = await axiosGetUser()
+      localStorage.setItem('userLocal',JSON.stringify(userActual))
       
       console.log('userLocal',userActual)
       userActualSetRedux(userActual)//Setea el usuario en redux

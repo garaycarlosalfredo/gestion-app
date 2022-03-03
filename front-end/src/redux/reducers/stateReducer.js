@@ -1,25 +1,25 @@
 import {
-USER_SET,
-USER_CLEAN
-} from '../types/userTypes'
+STATE_CLEAN,
+STATE_SET
+} from '../types/stateTypes'
 
 //Cada reducer tiene su propio state
 
 const initialState = {
-    userState : null,
+    appState : null,
 }
 
 export default function user(state = initialState, action){
     switch(action.type){
-        case USER_SET:
+        case STATE_SET:
             return{
                 ...state,
-                userState: action.payload
+                appState: action.payload
             }
-        case USER_CLEAN:
+        case STATE_CLEAN:
             return{
                 ...state,
-                userState: action.payload
+                appState: action.payload
             }
 
         default:

@@ -5,8 +5,9 @@ import './App.css';
 import { BrowserRouter as Router, Route ,Routes ,Navigate} from 'react-router-dom';
 
 //Redux 
-import {Provider} from 'react-redux'
+import {Provider,useSelector} from 'react-redux'
 import store from './redux/store/store'
+
 
 //My Components
 import ResponsiveAppBar from './components/layout/ResponsiveAppBar';
@@ -17,7 +18,7 @@ import ProtectedRoute from './components/routeProtected/ProtectedRoute'
 import {checkUserAuth} from './util/auth'
 
 class App extends Component {
-  render() {
+  render() { 
     return (
       <Router>
         <Provider store = {store}>

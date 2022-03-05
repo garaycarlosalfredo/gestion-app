@@ -3,18 +3,14 @@ import { Routes, Route, Link, Navigate } from 'react-router-dom';
 //import AuthContext from '../../context/autenticacion/authContext'
 //import AuthState from '../../context/autenticacion/authState'
 //util auth
-import {checkUserAuth} from '../../util/auth'
+import {getLocalUser} from '../../util/auth'
 
 const ProtectedRoute = ({ user,redirectPath = '/', children }) => {
-    const [authCheck,authCheckSet] = useState(false)
+    //const userLocal = JSON.parse(localStorage.getItem('userLocal'))
+    const userLocal = getLocalUser()
 
-    useEffect(() => {
-        authCheckSet(checkUserAuth())
-      },[authCheck]);
-
-
-    console.log('authCheck',authCheck)
-    if (!authCheck) {
+    console.log('userLocal',userLocal)
+    if (userLocal===undefined || userLocal === null) {
       return <Navigate to={redirectPath} replace />;
     }
   

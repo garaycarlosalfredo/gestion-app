@@ -55,7 +55,7 @@ const Signin = () => {
 
     //Manejo del envío del formulario
     const onSuscribe = async()=>{  
-      console.log("login ", user)
+      //console.log("login ", user)
       if(checkRequired())return      
       const response = await axiosSignIn(user)
       console.log('response',response)
@@ -74,7 +74,7 @@ const Signin = () => {
       const userActual = await axiosGetUser()
       localStorage.setItem('userLocal',JSON.stringify(userActual))
       
-      console.log('userLocal',userActual)
+      //console.log('userLocal',userActual)
       userActualSetRedux(userActual)//Setea el usuario en redux
       handleClose()//Cierra el Dialog
       navigate('main')//Si el usuario fué encontrado se redirecciona a main

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React , { useState, useEffect , useRef }  from 'react';
 //imports Material UI
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -18,19 +18,32 @@ import Signin from './Dialog/Signin';
 import Signup from './Dialog/Signup';
 
 //Imports Redux
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch, useSelector, shallowEqual} from 'react-redux'
+import {userSetRedux} from '../../redux/actions/userActions'
+
+
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const ResponsiveAppBar = () => {
   //Redux
-    //Leer del store
-  //const userActual = useSelector(state)
-  //console.log('Header userActual = ', userActual)
+    //Setear en Readux
+  const dispatch = useDispatch();
+  const userActualSetRedux = u => dispatch(userSetRedux(u))
+    //Leer el store
+  const userRedux= useSelector(state=>state.userStore.user)
+ 
+
+
+  useEffect(() => {
+    if(userRedux===null) userActualSetRedux(JSON.parse(localStorage.getItem('userLocal')))
+  }, [userRedux]); // eslint-disable-line
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -124,7 +137,7 @@ const ResponsiveAppBar = () => {
           <Signin></Signin>
           <Signup></Signup>
           
-          <Box sx={{ flexGrow: 0 }}>
+          {(userRedux !== undefined && userRedux!== null)?<Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -152,7 +165,7 @@ const ResponsiveAppBar = () => {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
+          </Box>:null}
         </Toolbar>
       </Container>
     </AppBar>

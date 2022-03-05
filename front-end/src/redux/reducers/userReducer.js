@@ -6,7 +6,7 @@ USER_CLEAN
 //Cada reducer tiene su propio state
 
 const initialState = {
-    userState : null,
+    user : null,
 }
 
 export default function user(state = initialState, action){
@@ -14,12 +14,12 @@ export default function user(state = initialState, action){
         case USER_SET:
             return{
                 ...state,
-                userState: action.payload
+                user: action.payload
             }
         case USER_CLEAN:
             return{
                 ...state,
-                userState: action.payload
+                user: action.payload
             }
 
         default:

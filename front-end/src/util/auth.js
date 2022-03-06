@@ -2,13 +2,21 @@ import {axiosGetUser} from '../service/authService'
 const userInLocal = 'userLocal'
 const tokenInLocal = 'token'
 
+export const checkResponseNok = (response) =>{   //Con un token válido se obtiene el usuario actual y se guarda en local storage
+    if(response !== null && response.data !== undefined && response.status !== 200){
+        return true
+    }else{
+        return false
+    }
+}
 
-export const setlocalUser = async (token) =>{   //Con un token válido se obtiene el usuario actual y se guarda en local storage
-    localStorage.setItem("token", token);
-    const user = axiosGetUser()
+export const setlocalUser = (user) =>{   //Con un token válido se obtiene el usuario actual y se guarda en local storage
     localStorage.setItem(userInLocal,JSON.stringify(user))
-    let values = await Promise.all([user])
     return user
+}
+export const setlocalToken = (token) =>{   //Con un token válido se obtiene el usuario actual y se guarda en local storage
+    localStorage.setItem(tokenInLocal,token)
+    return token
 }
 
 export const checkUserAuth = ()=>{  //Verifica que haya un usuario en local storage

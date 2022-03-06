@@ -2,10 +2,10 @@ import {clienteAxios, createHeader} from './config/axios'
 
 
 
-export const createUser = async (user) =>{
+export const axiosSignUp = async (user) =>{
     let  respuesta = {}
     try {
-        const  res  = await clienteAxios.post(`/api/user`,user,createHeader())
+        const  res  = await clienteAxios.post(`/api/user`,user)
         respuesta = res.data
         //console.log(respuesta)
         return respuesta
@@ -19,14 +19,15 @@ export const axiosSignIn= async (user) =>{
     //console.log('En service user ',user)
     let  respuesta = {}
     try {
-        const  res  = await clienteAxios.post(`/api/auth`,user,createHeader())
-        console.log('En service res',res)
+        //console.log('En service user',user)
+        const  res  = await clienteAxios.post(`/api/auth`,user)
+        //console.log('En service res',res)
         respuesta = res.data
-        console.log('En service',respuesta)
+        //console.log('En service',respuesta)
         return respuesta
     } catch (error) {
-        console.log('En service error',error)
-        console.log('En service',error.response.data)
+        //console.log('En service error',error)
+        //console.log('En service',error.response.data)
         respuesta = error.response
     }
     return respuesta

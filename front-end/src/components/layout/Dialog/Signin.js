@@ -20,10 +20,10 @@ import Stack from '@mui/material/Stack';
 import {axiosSignIn,axiosGetUser} from '../../../service/authService'
 
 //Util
-import {setlocalUser} from '../../../util/auth'
+import {checkResponseNok} from '../../../util/auth'
 
 //Redux
-import {userSetRedux} from '../../../redux/actions/userActions'
+import {userSetRedux,actionSignIn} from '../../../redux/actions/userActions'
 import { useDispatch , useSelector} from 'react-redux';
 
 
@@ -34,7 +34,8 @@ const Signin = () => {
     //Redux
       //Setear en Readux
     const dispatch = useDispatch();
-    const userActualSetRedux = u => dispatch(userSetRedux(u))
+    //const userActualSetRedux = u => dispatch(actionSignIn(u))
+    const userSignIn = u => dispatch(actionSignIn(u))
 
   
     const [open, setOpen] = React.useState(false);
@@ -56,11 +57,14 @@ const Signin = () => {
     //Manejo del envío del formulario
     const onSuscribe = async()=>{  
       //console.log("login ", user)
-      if(checkRequired())return      
-      const response = await axiosSignIn(user)
+      if(checkRequired())return
+
+      //const response = await axiosSignIn(user)
+      const response = await userSignIn(user)
+
       console.log('response',response)
 
-      if(response !== null && response.data !== undefined && response.status !== 200){ //Si hubo un error deja el formulario visible y muersta errores
+      if(checkResponseNok(response)){ //Si hubo un error deja el formulario visible y muersta errores
         if(response.data.errors){
           setBackResponse(response.data.errors)
         }else{
@@ -68,16 +72,8 @@ const Signin = () => {
         }
         return
       }
-      
-      localStorage.setItem('token',response.token)
-      //const userLocal = setlocalUser(response.token);//Guarda el usuario en localStorage
-      const userActual = await axiosGetUser()
-      localStorage.setItem('userLocal',JSON.stringify(userActual))
-      
-      //console.log('userLocal',userActual)
-      userActualSetRedux(userActual)//Setea el usuario en redux
       handleClose()//Cierra el Dialog
-      navigate('main')//Si el usuario fué encontrado se redirecciona a main
+      navigate(response.navigate)//Si el usuario fué encontrado se redirecciona a main
     }
 
     //Chequeo básico de variables del formulario

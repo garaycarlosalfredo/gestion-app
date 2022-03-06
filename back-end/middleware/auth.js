@@ -13,6 +13,8 @@ module.exports = function(req, res,next){
     }
     //validar el token
     try {
+        console.log('Secret env',process.env.SECRETA)
+        console.log('token',token.slice(7))
         const cifrado = jwt.verify(token.slice(7), process.env.SECRETA)//Se quitan los primeros 7 caracteres con slice pertenecientes a "Bearer "
         req.user = cifrado.user
         next()

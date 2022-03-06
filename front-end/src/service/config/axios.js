@@ -10,6 +10,7 @@ export const clienteAxios = axios.create({
 export const createHeader = ()=>{
     //let token = localStorage.getItem("token")
     const token = getLocalToken()//Toma el token en el local Storage
+    console.log('createHeader() token',token)
     return {
         headers: {
             'Content-Type': 'application/json',

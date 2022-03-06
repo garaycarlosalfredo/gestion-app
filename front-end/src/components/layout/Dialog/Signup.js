@@ -18,9 +18,9 @@ import Stack from '@mui/material/Stack';
 //Service
 import {createUser,axiosGetUser} from '../../../service/authService'
 //Util
-import {setlocalUser} from '../../../util/auth'
+import {checkResponseNok} from '../../../util/auth'
 //Redux
-import {userSetRedux} from '../../../redux/actions/userActions'
+import {userSetRedux,actionSignUp} from '../../../redux/actions/userActions'
 import { useDispatch , useSelector} from 'react-redux';
 
 const Signup = () => {
@@ -29,7 +29,7 @@ const Signup = () => {
     //Redux
       //Setear en Readux
     const dispatch = useDispatch();
-    const userActualSetRedux = u => dispatch(userSetRedux(u))
+    const userSignUp = u => dispatch(actionSignUp(u))
   
     const [open, setOpen] = React.useState(false);
     const [user, setUser] = useState({})
@@ -49,9 +49,10 @@ const Signup = () => {
     //Manejo del envío del formulario
     const onSuscribe = async()=>{  
       if(checkRequired())return      
-      const response = await createUser(user)
+      //const response = await createUser(user)
+      const response = await userSignUp(user)
 
-      if(response !== null && response.data !== undefined && response.status !== 200){ //Si hubo un error deja el formulario visible y muersta errores
+      if(checkResponseNok(response)){ //Si hubo un error deja el formulario visible y muersta errores
         if(response.data.errors){
           setBackResponse(response.data.errors)
         }else{
@@ -60,15 +61,8 @@ const Signup = () => {
         return
       }
 
-      localStorage.setItem('token',response.token)
-      //const userLocal = setlocalUser(response.token);//Guarda el usuario en localStorage
-      const userActual = await axiosGetUser()
-      localStorage.setItem('userLocal',JSON.stringify(userActual))
-      
-      //console.log('userLocal',userActual)
-      userActualSetRedux(userActual)//Setea el usuario en redux
       handleClose()//Cierra el Dialog
-      navigate('main')//Si el usuario fué encontrado se redirecciona a main
+      navigate(response.navigate)//Si el usuario fué encontrado se redirecciona a main
     }
 
     //Chequeo básico de variables del formulario

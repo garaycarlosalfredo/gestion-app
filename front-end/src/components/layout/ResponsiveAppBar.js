@@ -19,12 +19,12 @@ import Signup from './Dialog/Signup';
 
 //Imports Redux
 import {useDispatch, useSelector, shallowEqual} from 'react-redux'
-import {userSetRedux} from '../../redux/actions/userActions'
+import {userSetRedux,userCleanRedux} from '../../redux/actions/userActions'
 
 
 
 const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Account', 'Dashboard', 'Salir'];
 
 const ResponsiveAppBar = () => {
   //Redux
@@ -61,8 +61,14 @@ const ResponsiveAppBar = () => {
   };
 
   const UserSelection = (userSelection)=>{
-    console.log(userSelection)
+    if(userSelection === 'Salir') signOut()
     handleCloseUserMenu()
+  }
+
+  const signOut = ()=>{
+    localStorage.clear()
+    userCleanRedux()
+    console.log("Salir")
   }
 
   return (

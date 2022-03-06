@@ -16,13 +16,20 @@ import AlertTitle from '@mui/material/AlertTitle';
 import Stack from '@mui/material/Stack';
 
 //Service
-import {createUser} from '../../../service/authService'
+import {createUser,axiosGetUser} from '../../../service/authService'
 //Util
 import {setlocalUser} from '../../../util/auth'
+//Redux
+import {userSetRedux} from '../../../redux/actions/userActions'
+import { useDispatch , useSelector} from 'react-redux';
 
 const Signup = () => {
 
-    let navigate = useNavigate();
+    let navigate = useNavigate();    //Redux
+    //Redux
+      //Setear en Readux
+    const dispatch = useDispatch();
+    const userActualSetRedux = u => dispatch(userSetRedux(u))
   
     const [open, setOpen] = React.useState(false);
     const [user, setUser] = useState({})
@@ -53,7 +60,13 @@ const Signup = () => {
         return
       }
 
-      setlocalUser(response.token);//Guarda el usuario en localStorage
+      localStorage.setItem('token',response.token)
+      //const userLocal = setlocalUser(response.token);//Guarda el usuario en localStorage
+      const userActual = await axiosGetUser()
+      localStorage.setItem('userLocal',JSON.stringify(userActual))
+      
+      //console.log('userLocal',userActual)
+      userActualSetRedux(userActual)//Setea el usuario en redux
       handleClose()//Cierra el Dialog
       navigate('main')//Si el usuario fué encontrado se redirecciona a main
     }

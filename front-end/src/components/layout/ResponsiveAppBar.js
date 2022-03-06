@@ -1,4 +1,7 @@
 import React , { useState, useEffect , useRef }  from 'react';
+//React Router Dom
+import { useNavigate } from 'react-router-dom';
+
 //imports Material UI
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -19,9 +22,10 @@ import Signup from './Dialog/Signup';
 
 //Imports Redux
 import {useDispatch, useSelector, shallowEqual} from 'react-redux'
-import {userSetRedux,userCleanRedux} from '../../redux/actions/userActions'
+import {userSetRedux,actionSignOut} from '../../redux/actions/userActions'
 
-
+//Util
+import {checkReduxUserIsPresent} from '../../util/auth'
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Salir'];
@@ -30,14 +34,17 @@ const ResponsiveAppBar = () => {
   //Redux
     //Setear en Readux
   const dispatch = useDispatch();
-  const userActualSetRedux = u => dispatch(userSetRedux(u))
+  const userRefresh = u => dispatch(userSetRedux(u))
+  const userSignOut = () => dispatch(actionSignOut())
     //Leer el store
   const userRedux= useSelector(state=>state.userStore.user)
- 
+
+  //rediceccionar
+  let navigate = useNavigate();
 
 
   useEffect(() => {
-    if(userRedux===null) userActualSetRedux(JSON.parse(localStorage.getItem('userLocal')))
+    if(userRedux===null) userRefresh(JSON.parse(localStorage.getItem('userLocal'))) //si recargo la página refresco el usuario desde el localStorage
   }, [userRedux]); // eslint-disable-line
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -66,9 +73,9 @@ const ResponsiveAppBar = () => {
   }
 
   const signOut = ()=>{
-    localStorage.clear()
-    userCleanRedux()
-    console.log("Salir")
+    const response = userSignOut()
+    //console.log(response)
+    navigate(response.navigate)//Si el usuario fué encontrado se redirecciona a main
   }
 
   return (
@@ -140,13 +147,13 @@ const ResponsiveAppBar = () => {
             ))}
           </Box>
 
-          <Signin></Signin>
-          <Signup></Signup>
+          {(!checkReduxUserIsPresent(userRedux))?<Signin></Signin>:null}
+          {(!checkReduxUserIsPresent(userRedux))?<Signup></Signup>:null}
           
-          {(userRedux !== undefined && userRedux!== null)?<Box sx={{ flexGrow: 0 }}>
+          {(checkReduxUserIsPresent(userRedux))?<Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt= {userRedux.name} src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
             <Menu

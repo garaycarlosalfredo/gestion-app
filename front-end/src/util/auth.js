@@ -10,6 +10,14 @@ export const checkResponseNok = (response) =>{   //Con un token válido se obtie
     }
 }
 
+export const checkReduxUserIsPresent = (userRedux) =>{   //Con un token válido se obtiene el usuario actual y se guarda en local storage
+    if(userRedux !== undefined && userRedux!== null){
+        return true
+    }else{
+        return false
+    }
+}
+
 export const setlocalUser = (user) =>{   //Con un token válido se obtiene el usuario actual y se guarda en local storage
     localStorage.setItem(userInLocal,JSON.stringify(user))
     return user

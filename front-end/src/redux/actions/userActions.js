@@ -7,9 +7,10 @@ import {
 //Service
 import {axiosSignIn,axiosGetUser,axiosSignUp} from '../../service/authService'
 //Util
-import {setlocalUser,setlocalToken,checkResponseNok} from '../../util/auth'
+import {setlocalUser,setlocalToken,checkResponseNok,localUserClear} from '../../util/auth'
 //Url values
 const mainUrl = 'main'//Check change for env
+const homeUrl = 'home'//Check change for env
 
 export function actionSignIn(user){
     return async (dispatch)=>{
@@ -48,9 +49,12 @@ export function userSetRedux(user){
     }
 }
 
-export function userCleanRedux(){
+export function actionSignOut(){
     return(dispatch)=>{
+        localUserClear()
         dispatch(userCleanState())
+        const response = {navigate : homeUrl}
+        return response
     }
 }
 

@@ -9,7 +9,7 @@ const ProtectedRoute = ({ user,redirectPath = '/', children }) => {
     //const userLocal = JSON.parse(localStorage.getItem('userLocal'))
     const userLocal = getLocalUser()
 
-    console.log('userLocal',userLocal)
+    //console.log('userLocal',userLocal)
     if (userLocal===undefined || userLocal === null) {
       return <Navigate to={redirectPath} replace />;
     }

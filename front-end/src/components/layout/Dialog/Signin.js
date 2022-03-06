@@ -30,12 +30,13 @@ import { useDispatch , useSelector} from 'react-redux';
 
 const Signin = () => {
 
-    let navigate = useNavigate();
     //Redux
       //Setear en Readux
     const dispatch = useDispatch();
     //const userActualSetRedux = u => dispatch(actionSignIn(u))
     const userSignIn = u => dispatch(actionSignIn(u))
+    //react-router-Dom
+    const navigate = useNavigate();
 
   
     const [open, setOpen] = React.useState(false);
@@ -51,7 +52,7 @@ const Signin = () => {
     //Manejo cierre del Dialog
     const handleClose = () => {
       setOpen(false);
-      setSubmitted(false);        
+      setSubmitted(false);      
     };
 
     //Manejo del envío del formulario
@@ -61,7 +62,6 @@ const Signin = () => {
 
       //const response = await axiosSignIn(user)
       const response = await userSignIn(user)
-
       console.log('response',response)
 
       if(checkResponseNok(response)){ //Si hubo un error deja el formulario visible y muersta errores
@@ -72,7 +72,7 @@ const Signin = () => {
         }
         return
       }
-      handleClose()//Cierra el Dialog
+      //handleClose()//Cierra el Dialog
       navigate(response.navigate)//Si el usuario fué encontrado se redirecciona a main
     }
 

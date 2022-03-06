@@ -7,10 +7,10 @@ import {
 //Service
 import {axiosSignIn,axiosGetUser,axiosSignUp} from '../../service/authService'
 //Util
-import {setlocalUser,setlocalToken,checkResponseNok,localUserClear} from '../../util/auth'
+import {setlocalUser,setlocalToken,checkResponseNok,localUserClear,getLocalUser} from '../../util/auth'
 //Url values
-const mainUrl = 'main'//Check change for env
-const homeUrl = 'home'//Check change for env
+const mainUrl = process.env.REACT_APP_MAIN_URL//Check change for env
+const homeUrl = process.env.REACT_APP_HOME_URL//Check change for env
 
 export function actionSignIn(user){
     return async (dispatch)=>{
@@ -40,9 +40,16 @@ export function actionSignUp(user){
         setlocalUser(responseUser)
         dispatch(userSetState(responseUser))
         response.navigate = mainUrl
+        //console.log('env ',process.env.REACT_APP_MAIN_URL)
         return response
     }
 }
+export function ActionRefreshFromLocal(user){
+    return (dispatch)=>{
+        dispatch(userSetState(getLocalUser()))
+    }
+}
+
 export function userSetRedux(user){
     return (dispatch)=>{
         dispatch(userSetState(user))

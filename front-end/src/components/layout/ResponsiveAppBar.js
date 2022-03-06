@@ -22,7 +22,7 @@ import Signup from './Dialog/Signup';
 
 //Imports Redux
 import {useDispatch, useSelector, shallowEqual} from 'react-redux'
-import {userSetRedux,actionSignOut} from '../../redux/actions/userActions'
+import {ActionRefreshFromLocal,actionSignOut} from '../../redux/actions/userActions'
 
 //Util
 import {checkReduxUserIsPresent} from '../../util/auth'
@@ -34,7 +34,7 @@ const ResponsiveAppBar = () => {
   //Redux
     //Setear en Readux
   const dispatch = useDispatch();
-  const userRefresh = u => dispatch(userSetRedux(u))
+  const userRefresh = u => dispatch(ActionRefreshFromLocal(u))
   const userSignOut = () => dispatch(actionSignOut())
     //Leer el store
   const userRedux= useSelector(state=>state.userStore.user)
@@ -44,7 +44,7 @@ const ResponsiveAppBar = () => {
 
 
   useEffect(() => {
-    if(userRedux===null) userRefresh(JSON.parse(localStorage.getItem('userLocal'))) //si recargo la página refresco el usuario desde el localStorage
+    if(userRedux===null) userRefresh() //si recargo la página refresco el usuario desde el localStorage
   }, [userRedux]); // eslint-disable-line
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);

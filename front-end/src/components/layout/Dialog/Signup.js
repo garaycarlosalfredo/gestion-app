@@ -61,7 +61,7 @@ const Signup = () => {
         return
       }
 
-      handleClose()//Cierra el Dialog
+      //handleClose()//Cierra el Dialog
       navigate(response.navigate)//Si el usuario fué encontrado se redirecciona a main
     }
 

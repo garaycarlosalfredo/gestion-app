@@ -1,4 +1,4 @@
-const {getAllUserList,signUp, resolveTypeUser} = require('./user/userResolver')
+const {getAllUserList,signUp, signIn, resolveTypeUser} = require('./user/userResolver')
 const {getActivityList} = require('./activity/activityResolver')
 const {getAllTeamList,createTeam, resolveTypeTeam} = require('./team/teamResolver')
 
@@ -9,6 +9,7 @@ const resolvers = {
         teamList : getAllTeamList
     },
     Mutation: {
+        loginUser :signIn,
         createUser : signUp,
         createTeam : createTeam
     },

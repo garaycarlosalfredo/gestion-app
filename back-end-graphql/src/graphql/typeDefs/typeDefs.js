@@ -22,8 +22,13 @@ const typeDefs = gql`
         teamList : [Team]
     }
 
+    input UserLogin{
+        email:String, 
+        password: String
+    }
+    
     type Mutation {
-        loginUser( name: String, email:String, phone: String, password: String ) : userResponse,
+        loginUser( input : UserLogin ) : userResponse,
         createUser( name: String, email:String, phone: String, password: String ) : userResponse,
         createTeam ( name: String, status: Boolean, created:Date,updated:Date,members:[String]) : teamResponse
     }

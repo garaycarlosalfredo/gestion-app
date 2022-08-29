@@ -31,6 +31,13 @@ const UserSchema = mongoose.Schema({
         alias: 'String'
 
     },
+    token:{
+        type: String,
+        required: false,
+        trim: true,
+        alias: 'String'
+
+    },
     createDate:{
         type: Date,
         default: Date.now(),

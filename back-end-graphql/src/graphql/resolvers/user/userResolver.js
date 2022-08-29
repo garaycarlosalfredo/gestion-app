@@ -2,6 +2,7 @@ const {ApolloError} = require("apollo-server")
 const User = require('../../../model/User')
 const bcryptjs = require('bcryptjs')
 const {errorMessage} = require('../../errorHandle/errorTypes')
+const jwt = require('jsonwebtoken');
 
 exports.getAllUserList = async()=>{
 
@@ -78,61 +79,85 @@ exports.signUp = async(root,args)=>{
 
 exports.signIn = async(root,args)=>{
 
-    console.log(args)
     //revisar si hay errores
-
+    //Extraer el objeto del input
+    const {input} = args
     //Extraer email y password
-    const {email, password} = args
+    const {email, password} = input
 
     try {
+        //Revisar que sea un usuario registrado
+        let user = await User.findOne({email})
 
-        //Hashear el password
-        const salt = await bcryptjs.genSalt(10)
-        passwordBcypt = await bcryptjs.hash(password, salt)
+        /*if(!user){
+            return res.status(400).json({msg: 'No se encontró el usuario'})
+        } usa error de abajo apollo*/
 
-        let checkUser = await User.findOne({email,passwordBcypt});
-
-        if(!checkUser){
+        if(!user){
             const userExist = "Usuario no exsiste"
             console.log(userExist)
             //return userExist
-            return new ApolloError('userNoExist',500)
+            return new ApolloError('userNotExist',500)
         }
 
-        //guardar nuevo usuario
-        //newUser = new User(args)
+        const passCorrecto = await bcryptjs.compare(password, user.password)
+        console.log('passCorrecto',passCorrecto)
 
+        /*if(!passCorrecto){
+            return res.status(400).json({msg: 'password incorrecto'})
+        }*/
 
+        if(!passCorrecto){
+            const userExist = "password incorrecto"
+            console.log(userExist)
+            //return userExist
+            return new ApolloError('password incorrecto',500)
+        }
 
-        //guardar usuario
-        //await newUser.save()
-
-        /*
+        //Si es todo correcto creo el jwt
         //Crear y firmar el jwt
         const payload = {
             user:{
                 id: user.id
             }
         }
-
+        console.log('payload',payload)
+        
+        /*
         //Firmar el jwt
         jwt.sign(payload,process.env.SECRETA,{
                 expiresIn: 3600 //1 hora
             },(error, token)=>{
                 if(error)throw error
-
                 //mensaje de confirmación
-                console.log("Usuario creado correctamente")
-                return res.json({token})
+                console.log("Usuario iniciado correctamente")
+
+                console.log("token",token)
+                console.log("user",user)
+                //user.token = token
+                //return {user}
+                //return res.json({user})
+                user.token = token
 
             }
         )*/
 
-        return {user : checkUser}
+        const token = jwt.sign(payload,process.env.SECRETA,{
+            expiresIn: 3600 //1 hora
+        })
+
+        console.log('token',token)
+        user.token = token
+        console.log('user',user)
+
+        return {user}
+
+
+        //console.log('response user r',r)
 
     } catch (error) {
-        console.log("erorr al intentar guardar  un usuario : ", error)
-        return({message: 'error'})
+        console.log("erorr al intentar lograr  un usuario : ", error)
+        return({message: 'error en login'})
     }
 }
 

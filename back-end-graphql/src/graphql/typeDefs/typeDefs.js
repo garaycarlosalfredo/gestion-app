@@ -16,6 +16,11 @@ const typeDefs = gql`
 
     ${createTypeDefsFromModel('Activity',Activity)}
 
+    type SignInResponse {
+        token: String    
+        message: String
+      }
+
     type Query {
         usersList : [User],
         activityList : [Activity],
@@ -28,7 +33,7 @@ const typeDefs = gql`
     }
     
     type Mutation {
-        loginUser( input : UserLogin ) : userResponse,
+        loginUser( input : UserLogin ) : authResponse,
         createUser( name: String, email:String, phone: String, password: String ) : userResponse,
         createTeam ( name: String, status: Boolean, created:Date,updated:Date,members:[String]) : teamResponse
     }
@@ -43,9 +48,16 @@ const typeDefs = gql`
         user : User
     }
 
+    type authSuccessResponse {
+        token:  String
+        user : User
+    }
+
     union teamResponse = teamSuccessResponse | errorResponse
 
     union userResponse = userSuccessResponse | errorResponse
+
+    union authResponse = authSuccessResponse | errorResponse
 
 `
 //console.log(typeDefs)

@@ -1,6 +1,7 @@
-const {getAllUserList,signUp, signIn, resolveTypeUser} = require('./user/userResolver')
+const {getAllUserList,resolveTypeUser} = require('./user/userResolver')
 const {getActivityList} = require('./activity/activityResolver')
 const {getAllTeamList,createTeam, resolveTypeTeam} = require('./team/teamResolver')
+const {signUp, signIn ,resolveTypeAuth} =  require ('./auth/authResolver')
 
 const resolvers = {
     Query :{
@@ -14,7 +15,8 @@ const resolvers = {
         createTeam : createTeam
     },
     teamResponse: resolveTypeTeam,
-    userResponse: resolveTypeUser
+    userResponse: resolveTypeUser,
+    authResponse : resolveTypeAuth
 }
 
 module.exports = resolvers

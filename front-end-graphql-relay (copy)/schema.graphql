@@ -1,0 +1,80 @@
+"""Exposes a URL that specifies the behavior of this scalar."""
+directive @specifiedBy(
+  """The URL that specifies the behavior of this scalar."""
+  url: String!
+) on SCALAR
+
+type Activity {
+  name: String
+  creator: String
+  created: Date
+  updated: Date
+  teams: [Team]
+  _id: String
+}
+
+union authResponse = authSuccessResponse | errorResponse
+
+type authSuccessResponse {
+  token: String
+  user: User
+}
+
+scalar Date
+
+type errorResponse {
+  message: String!
+}
+
+type Mutation {
+  loginUser(input: UserLogin): authResponse
+  createUser(name: String, email: String, phone: String, password: String): userResponse
+  createTeam(name: String, status: Boolean, created: Date, updated: Date, members: [String]): teamResponse
+}
+
+type Query {
+  usersList: [User]
+  activityList: [Activity]
+  teamList: [Team]
+}
+
+type SignInResponse {
+  token: String
+  message: String
+}
+
+type Team {
+  name: String
+  status: Boolean
+  created: Date
+  updated: Date
+  members: [User]
+  _id: String
+}
+
+union teamResponse = teamSuccessResponse | errorResponse
+
+type teamSuccessResponse {
+  team: Team
+}
+
+type User {
+  name: String
+  email: String
+  phone: String
+  password: String
+  createDate: Date
+  _id: String
+}
+
+input UserLogin {
+  email: String
+  password: String
+}
+
+union userResponse = userSuccessResponse | errorResponse
+
+type userSuccessResponse {
+  user: User
+}
+

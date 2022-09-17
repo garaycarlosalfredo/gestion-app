@@ -31,7 +31,8 @@ const typeDefs = gql`
         email:String, 
         password: String
     }
-    
+
+
     type Mutation {
         loginUser( input : UserLogin ) : authResponse,
         createUser( name: String, email:String, phone: String, password: String ) : userResponse,

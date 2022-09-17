@@ -13,6 +13,13 @@ type Activity {
   _id: String
 }
 
+union authResponse = authSuccessResponse | errorResponse
+
+type authSuccessResponse {
+  token: String
+  user: User
+}
+
 scalar Date
 
 type errorResponse {
@@ -20,7 +27,7 @@ type errorResponse {
 }
 
 type Mutation {
-  loginUser(name: String, email: String, phone: String, password: String): userResponse
+  loginUser(input: UserLogin): authResponse
   createUser(name: String, email: String, phone: String, password: String): userResponse
   createTeam(name: String, status: Boolean, created: Date, updated: Date, members: [String]): teamResponse
 }
@@ -29,6 +36,11 @@ type Query {
   usersList: [User]
   activityList: [Activity]
   teamList: [Team]
+}
+
+type SignInResponse {
+  token: String
+  message: String
 }
 
 type Team {
@@ -53,6 +65,11 @@ type User {
   password: String
   createDate: Date
   _id: String
+}
+
+input UserLogin {
+  email: String
+  password: String
 }
 
 union userResponse = userSuccessResponse | errorResponse

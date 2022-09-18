@@ -27,7 +27,7 @@ type errorResponse {
 }
 
 type Mutation {
-  loginUser(input: UserLogin): authResponse
+  signInUser(input: UserSignIn): authResponse
   signUpUser(input: UserSignUp): authResponse
   createTeam(name: String, status: Boolean, created: Date, updated: Date, members: [String]): teamResponse
 }
@@ -69,12 +69,12 @@ type User {
   _id: String
 }
 
-input UserLogin {
+union userResponse = userSuccessResponse | errorResponse
+
+input UserSignIn {
   email: String
   password: String
 }
-
-union userResponse = userSuccessResponse | errorResponse
 
 input UserSignUp {
   firstName: String

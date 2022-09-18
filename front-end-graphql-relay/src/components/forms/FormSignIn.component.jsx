@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import userLoginMutation from "../../mutations/LoginUserMutation.mutation";
+import SignInUserMutation from "../../mutations/SignInUserMutation.mutation";
 import { useRelayEnvironment } from "react-relay";
 
 const FormSignIn = () => {
@@ -28,7 +28,7 @@ const FormSignIn = () => {
               //console.log(values)
               //console.log(environment)
             }, 400);*/
-      userLoginMutation(environment, values);
+      SignInUserMutation(environment, values);
     },
   });
 

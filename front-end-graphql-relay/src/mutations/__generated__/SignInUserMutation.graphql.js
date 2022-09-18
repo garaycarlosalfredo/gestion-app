@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<f8f15e4416d75f4f764a73403481c935>>
+ * @generated SignedSource<<cb96a98566eea93ffec90271a25eafd0>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -102,14 +102,14 @@ return {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
-    "name": "LoginUserMutation",
+    "name": "SignInUserMutation",
     "selections": [
       {
         "alias": null,
         "args": (v1/*: any*/),
         "concreteType": null,
         "kind": "LinkedField",
-        "name": "loginUser",
+        "name": "signInUser",
         "plural": false,
         "selections": [
           (v2/*: any*/),
@@ -125,14 +125,14 @@ return {
   "operation": {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
-    "name": "LoginUserMutation",
+    "name": "SignInUserMutation",
     "selections": [
       {
         "alias": null,
         "args": (v1/*: any*/),
         "concreteType": null,
         "kind": "LinkedField",
-        "name": "loginUser",
+        "name": "signInUser",
         "plural": false,
         "selections": [
           {
@@ -150,16 +150,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "494232652cb6ab2a0b9dab97eee67809",
+    "cacheID": "4d1f6ce546b13d273b35663468419232",
     "id": null,
     "metadata": {},
-    "name": "LoginUserMutation",
+    "name": "SignInUserMutation",
     "operationKind": "mutation",
-    "text": "mutation LoginUserMutation(\n  $input: UserLogin\n) {\n  loginUser(input: $input) {\n    __typename\n    ... on authSuccessResponse {\n      token\n      user {\n        firstName\n        lastName\n        email\n        phone\n        _id\n      }\n    }\n    ... on errorResponse {\n      message\n    }\n  }\n}\n"
+    "text": "mutation SignInUserMutation(\n  $input: UserSignIn\n) {\n  signInUser(input: $input) {\n    __typename\n    ... on authSuccessResponse {\n      token\n      user {\n        firstName\n        lastName\n        email\n        phone\n        _id\n      }\n    }\n    ... on errorResponse {\n      message\n    }\n  }\n}\n"
   }
 };
 })();
 
-node.hash = "2004250e80a68025d78474e2ea4290c7";
+node.hash = "e5b32b3f26e84d5bd6901eca5230e436";
 
 module.exports = node;

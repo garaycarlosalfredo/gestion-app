@@ -37,29 +37,35 @@ const FormSignIn = () => {
       <p>Form Sign In</p>
 
       <form onSubmit={formik.handleSubmit}>
-        <input
-          placeholder="email"
-          type="email"
-          name="email"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.email}
-        />
-        {formik.errors.email && formik.touched.email && formik.errors.email}
-        <input
-          placeholder="password"
-          type="password"
-          name="password"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.password}
-        />
-        {formik.errors.password &&
-          formik.touched.password &&
-          formik.errors.password}
-        <button type="submit" disabled={formik.isSubmitting}>
-          Submit
-        </button>
+        <div>
+          <input
+            placeholder="email"
+            type="email"
+            name="email"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.email}
+          />
+          {formik.errors.email && formik.touched.email && formik.errors.email}
+        </div>
+        <div>
+          <input
+            placeholder="password"
+            type="password"
+            name="password"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.password}
+          />
+          {formik.errors.password &&
+            formik.touched.password &&
+            formik.errors.password}
+        </div>
+        <div>
+          <button type="submit" disabled={formik.isSubmitting}>
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   );

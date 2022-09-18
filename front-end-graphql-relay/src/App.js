@@ -1,4 +1,6 @@
 // your-app-name/src/App.js
+
+import "bootstrap/dist/css/bootstrap.min.css";
 import React, { createContext, useState } from "react";
 import "./App.css";
 import {

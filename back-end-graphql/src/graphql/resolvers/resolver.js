@@ -11,7 +11,7 @@ const resolvers = {
     },
     Mutation: {
         loginUser :signIn,
-        createUser : signUp,
+        signUpUser : signUp,
         createTeam : createTeam
     },
     teamResponse: resolveTypeTeam,

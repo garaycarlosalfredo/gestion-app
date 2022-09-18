@@ -29,30 +29,78 @@ const WestContainer = () => {
     setActionSelection(actionSelectionOptions.selection_signup);
   };
 
-  const handleNoSelection = () => {
-    setActionSelection(actionSelectionOptions.selection_empty);
-  };
-
   return (
     <div>
       <div>
         <div>
-          <button onClick={handleSignInSelection}>SignIn</button>
+          <button
+            type="button"
+            class="btn btn-primary m-1"
+            style={{ width: "200px" }}
+            data-bs-toggle="modal"
+            data-bs-target="#formModal"
+            onClick={handleSignInSelection}
+          >
+            SignIn
+          </button>
         </div>
         <div>
-          <button onClick={handleSignUpSelection}>SignUp</button>
-        </div>
-        <div>
-          <button onClick={handleNoSelection}>Cancelar</button>
+          <button
+            type="button"
+            class="btn btn-primary m-1"
+            style={{ width: "200px" }}
+            data-bs-toggle="modal"
+            data-bs-target="#formModal"
+            onClick={handleSignUpSelection}
+          >
+            SignUp
+          </button>
         </div>
       </div>
 
-      {actionSelection === actionSelectionOptions.selection_signup ? (
-        <FormSignUp></FormSignUp>
-      ) : null}
-      {actionSelection === actionSelectionOptions.selection_signin ? (
-        <FormSingIn></FormSingIn>
-      ) : null}
+      <div
+        class="modal fade"
+        id="formModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                Modal title
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              {actionSelection === actionSelectionOptions.selection_signup ? (
+                <FormSignUp></FormSignUp>
+              ) : null}
+              {actionSelection === actionSelectionOptions.selection_signin ? (
+                <FormSingIn></FormSingIn>
+              ) : null}
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" class="btn btn-primary">
+                Save changes
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

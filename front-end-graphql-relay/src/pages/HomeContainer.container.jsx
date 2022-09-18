@@ -9,7 +9,6 @@ import {
 
 import AuthContext from "../contexts/auth/authContext";
 
-import Navbar from "../components/layout/Navbar.component";
 import WestContainer from "./containers/WestContainer.container";
 import UserContainer from "./containers/UserContainer.container";
 
@@ -27,7 +26,6 @@ const HomeContainer = (props) => {
 
   return (
     <div>
-      <Navbar></Navbar>
       <p> Autenticado = {isAuthenticated ? "true" : "false"}</p>
       <Router>
         <Routes>

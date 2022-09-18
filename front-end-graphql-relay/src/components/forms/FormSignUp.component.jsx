@@ -132,7 +132,11 @@ const FormSignUp = () => {
               formik.errors.password}
           </div>
           <div>
-            <button type="submit" disabled={formik.isSubmitting}>
+            <button
+              type="submit"
+              disabled={formik.isSubmitting}
+              data-bs-dismiss="modal"
+            >
               Submit
             </button>
           </div>

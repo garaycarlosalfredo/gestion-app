@@ -1,6 +1,7 @@
 // your-app-name/src/App.js
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import * as boostrap from "bootstrap";
 import React, { createContext, useState } from "react";
 import "./App.css";
@@ -12,6 +13,7 @@ import {
 import RelayEnvironment from "./RelayEnvironment";
 import fetchGraphQL from "./fetchGraphQL";
 import HomeContainer from "./pages/HomeContainer.container";
+import NavbarComponent from "./components/layout/Navbar.component";
 import AuthState from "./contexts/auth/authState";
 
 const { Suspense } = React;
@@ -49,7 +51,9 @@ function App() {
   // Render "Loading" until the query completes
   return (
     <div className="App">
-      <header className="App-header"></header>
+      <header className="App-header">
+        <NavbarComponent></NavbarComponent>
+      </header>
       <HomeContainer></HomeContainer>
     </div>
   );

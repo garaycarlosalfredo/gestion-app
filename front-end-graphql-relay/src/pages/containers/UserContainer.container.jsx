@@ -6,14 +6,12 @@ import PacientContainer from "./PacientContainer.container";
 
 const UserContainer = (props) => {
   const authContext = useContext(AuthContext);
-  const { isAuthenticated, user, removeCookieUser } = authContext;
+  const { isAuthenticated, user } = authContext;
   console.log(user.firstName);
   return (
     <div>
       User Container {user.lastName} {user.firstName}
-      <div>
-        <button onClick={removeCookieUser}>Log out</button>
-      </div>
+      <div></div>
       <ProfecionalContainer></ProfecionalContainer>
       <PacientContainer></PacientContainer>
     </div>

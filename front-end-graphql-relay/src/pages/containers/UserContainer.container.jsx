@@ -1,6 +1,8 @@
 import React, { Component, useContext } from "react";
 import PropTypes from "prop-types";
 import AuthContext from "../../contexts/auth/authContext";
+import ProfecionalContainer from "./ProfecionalContainer.container";
+import PacientContainer from "./PacientContainer.container";
 
 const UserContainer = (props) => {
   const authContext = useContext(AuthContext);
@@ -9,7 +11,11 @@ const UserContainer = (props) => {
   return (
     <div>
       User Container {user.lastName} {user.firstName}
-      <button onClick={removeCookieUser}>Log out</button>
+      <div>
+        <button onClick={removeCookieUser}>Log out</button>
+      </div>
+      <ProfecionalContainer></ProfecionalContainer>
+      <PacientContainer></PacientContainer>
     </div>
   );
 };

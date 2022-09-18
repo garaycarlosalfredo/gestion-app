@@ -1,19 +1,17 @@
 // your-app-name/src/App.js
-import React from 'react';
-import './App.css';
+import React, { createContext, useState } from "react";
+import "./App.css";
 import {
   RelayEnvironmentProvider,
   //loadQuery,
   //usePreloadedQuery,
-} from 'react-relay/hooks';
-import RelayEnvironment from './RelayEnvironment';
-import fetchGraphQL from './fetchGraphQL';
-import HomeContainer from './pages/Home.container';
+} from "react-relay/hooks";
+import RelayEnvironment from "./RelayEnvironment";
+import fetchGraphQL from "./fetchGraphQL";
+import HomeContainer from "./pages/HomeContainer.container";
+import AuthState from "./contexts/auth/authState";
 
 const { Suspense } = React;
-
-
-const { useState, useEffect } = React;
 
 function App() {
   // We'll load the name of a repository, initially setting it to null
@@ -48,11 +46,8 @@ function App() {
   // Render "Loading" until the query completes
   return (
     <div className="App">
-      <header className="App-header">
-
-      </header>
-        <HomeContainer></HomeContainer>
-
+      <header className="App-header"></header>
+      <HomeContainer></HomeContainer>
     </div>
   );
 }
@@ -64,11 +59,13 @@ function App() {
 // - <Suspense> specifies a fallback in case a child suspends.
 function AppRoot(props) {
   return (
-    <RelayEnvironmentProvider environment={RelayEnvironment}>
-      <Suspense fallback={'Loading...'}>
-        <App  />
-      </Suspense>
-    </RelayEnvironmentProvider>
+    <AuthState>
+      <RelayEnvironmentProvider environment={RelayEnvironment}>
+        <Suspense fallback={"Loading..."}>
+          <App />
+        </Suspense>
+      </RelayEnvironmentProvider>
+    </AuthState>
   );
 }
 

@@ -1,8 +1,15 @@
 import { useFormik } from "formik";
-import SignInUserMutation from "../../mutations/SignInUserMutation.mutation";
+import { useContext } from "react";
+import { useCookies } from "react-cookie";
 import { useRelayEnvironment } from "react-relay";
 
+import AuthContext from "../../contexts/auth/authContext";
+
+import SignInUserMutation from "../../mutations/SignInUserMutation.mutation";
+
 const FormSignIn = () => {
+  const authContext = useContext(AuthContext);
+  const { isAuthenticated, setCookieUser } = authContext;
   const environment = useRelayEnvironment();
   //console.log('environment',environment)
 
@@ -28,7 +35,13 @@ const FormSignIn = () => {
               //console.log(values)
               //console.log(environment)
             }, 400);*/
-      SignInUserMutation(environment, values);
+      SignInUserMutation(environment, values)
+        .then((response) => {
+          setCookieUser(response.signInUser);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   });
 

@@ -46,7 +46,7 @@ const NavbarComponent = (props) => {
                     </li>
                     <li>
                       <a class="dropdown-item" href="#">
-                        Another action
+                        check my data
                       </a>
                     </li>
                     <li>

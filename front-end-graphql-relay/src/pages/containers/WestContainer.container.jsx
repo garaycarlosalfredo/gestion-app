@@ -31,30 +31,48 @@ const WestContainer = () => {
 
   return (
     <div>
-      <div>
-        <div>
-          <button
-            type="button"
-            class="btn btn-primary m-1"
-            style={{ width: "200px" }}
-            data-bs-toggle="modal"
-            data-bs-target="#formModal"
-            onClick={handleSignInSelection}
-          >
-            SignIn
-          </button>
+      <div className="d-flex justify-content-center">
+        <div className="m-2">
+          <div class="card" style={{ width: "18rem" }}>
+            <img src="..." class="card-img-top" alt="..."></img>
+            <div class="card-body">
+              <h5 class="card-title">Ya soy un usuario</h5>
+              <p class="card-text">
+                Si ya sos un usuario registrado, igresa por aquí
+              </p>
+              <a
+                href="#"
+                class="btn btn-primary"
+                style={{ width: "200px" }}
+                data-bs-toggle="modal"
+                data-bs-target="#formModal"
+                onClick={handleSignInSelection}
+              >
+                sign-in
+              </a>
+            </div>
+          </div>
         </div>
-        <div>
-          <button
-            type="button"
-            class="btn btn-primary m-1"
-            style={{ width: "200px" }}
-            data-bs-toggle="modal"
-            data-bs-target="#formModal"
-            onClick={handleSignUpSelection}
-          >
-            SignUp
-          </button>
+        <div className="m-2">
+          <div class="card" style={{ width: "18rem" }}>
+            <img src="..." class="card-img-top" alt="..."></img>
+            <div class="card-body">
+              <h5 class="card-title">No soy usuario</h5>
+              <p class="card-text">
+                Si no sos usuario, completa los datos y generaremos un usuario
+              </p>
+              <a
+                href="#"
+                class="btn btn-primary"
+                style={{ width: "200px" }}
+                data-bs-toggle="modal"
+                data-bs-target="#formModal"
+                onClick={handleSignUpSelection}
+              >
+                Sign-up
+              </a>
+            </div>
+          </div>
         </div>
       </div>
 

@@ -31,11 +31,18 @@ const typeDefs = gql`
         email:String, 
         password: String
     }
-
+    input UserSignUp{
+        firstName: String,
+        lastName: String,
+        numberId: String,
+        email:String,
+        phone: String,
+        password:String
+    }
 
     type Mutation {
         loginUser( input : UserLogin ) : authResponse,
-        createUser( name: String, email:String, phone: String, password: String ) : userResponse,
+        signUpUser( input : UserSignUp) : authResponse,
         createTeam ( name: String, status: Boolean, created:Date,updated:Date,members:[String]) : teamResponse
     }
 

@@ -1,0 +1,16 @@
+{
+    "es":{
+        "modal": {
+            "user":{
+                "title": "Ya soy un usuario registrado",
+                "subtitle": "Si ya sos un usuario registrado, igresa por aquí",
+                "button": "Ingresar"
+            },
+            "west" : {
+                "title": "No soy usuario",
+                "subtitle":"Si ya sos un usuario registrado, igresa por aquí",
+                "button": "Registrarse"
+            }
+        }
+    }
+}

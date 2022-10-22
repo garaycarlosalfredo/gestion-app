@@ -54,8 +54,6 @@ const FormSignUp = () => {
   return (
     <div>
       <div>
-        <p>Form Sign Up</p>
-
         <form onSubmit={formik.handleSubmit}>
           <div>
             <input

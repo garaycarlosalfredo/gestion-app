@@ -2,12 +2,17 @@ import { useFormik } from "formik";
 import { useContext } from "react";
 import { useCookies } from "react-cookie";
 import { useRelayEnvironment } from "react-relay";
+import { path, prop } from "ramda";
 
 import AuthContext from "../../contexts/auth/authContext";
 
 import SignInUserMutation from "../../mutations/SignInUserMutation.mutation";
 
-const FormSignIn = () => {
+const t = require("../../text/text.json");
+
+const FormSignIn = ({ language }) => {
+  const txt = path([language, "modal", "user", "form"], t);
+
   const authContext = useContext(AuthContext);
   const { isAuthenticated, setCookieUser } = authContext;
   const environment = useRelayEnvironment();
@@ -47,8 +52,6 @@ const FormSignIn = () => {
 
   return (
     <div>
-      <p>Form Sign In</p>
-
       <form onSubmit={formik.handleSubmit}>
         <div>
           <input

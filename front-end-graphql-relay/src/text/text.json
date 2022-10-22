@@ -1,0 +1,28 @@
+{
+    "es": {
+        "modal": {
+            "user": {
+                "card": {
+                    "title": "Ya soy un usuario",
+                    "subtitle": "Si ya sos un usuario registrado, igresa por aquí",
+                    "button": "Ingresar"
+                },
+                "modal": {
+                    "title": "Ingrese sus credenciales",
+                    "subtitle": "Credenciales"
+                },
+                "form": {
+                    "title": "Ingrese sus credenciales",
+                    "subtitle": "Credenciales"
+                }
+            },
+            "west": {
+                "card": {
+                    "title": "No soy usuario",
+                    "subtitle": "Si no sos usuario, completa los datos y generaremos un usuario",
+                    "button": "Registrarse"
+                }
+            }
+        }
+    }
+}

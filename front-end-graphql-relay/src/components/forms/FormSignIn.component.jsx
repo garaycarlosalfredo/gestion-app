@@ -6,11 +6,11 @@ import { path, prop } from "ramda";
 import AuthContext from "../../contexts/auth/authContext";
 import { Input, SubmitButton } from "../core";
 import SignInUserMutation from "../../mutations/SignInUserMutation.mutation";
+import { useState } from "react";
 const t = require("../../text/text.json");
 
 const FormSignIn = ({ language }) => {
   const txt = path([language, "modal", "user", "form"], t);
-
   const authContext = useContext(AuthContext);
   const { isAuthenticated, setCookieUser } = authContext;
   const environment = useRelayEnvironment();
@@ -29,19 +29,19 @@ const FormSignIn = ({ language }) => {
       return errors;
     },
     onSubmit: (values, { setSubmitting }) => {
-      /*
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
-              setSubmitting(false);
-              //console.log(values)
-              //console.log(environment)
-            }, 400);*/
       SignInUserMutation(environment, values)
         .then((response) => {
-          setCookieUser(response.signInUser);
+          if (response.signInUser != null) {
+            setCookieUser(response.signInUser);
+            setSubmitting(false);
+          } else {
+            console.log("no logeado");
+            setSubmitting(false);
+            alert("usuario no encontrado");
+          }
         })
         .catch((err) => {
-          console.log(err);
+          console.log("err = ", err);
         });
     },
   });

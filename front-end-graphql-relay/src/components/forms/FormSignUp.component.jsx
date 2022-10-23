@@ -27,7 +27,7 @@ const FormSignUp = () => {
       if (!values.numberId) {
         errors.numberId = "Required";
       } else if (!/[0-9]{7,10}$/i.test(values.numberId)) {
-        errors.numberId = "Invalid numberId address";
+        errors.numberId = "Invalid numberId";
       }
 
       return errors;
@@ -75,6 +75,13 @@ const FormSignUp = () => {
             placeholder={"password"}
           />
           <SubmitButton formik={formik} dismiss={"modal"} text={"Submit"} />
+          <div class="alert alert-danger" role="alert" id="alert-error-sign-up">
+            This is a danger alert with{" "}
+            <a href="#" class="alert-link">
+              an example link
+            </a>
+            . Give it a click if you like.
+          </div>
         </form>
       </div>
     </div>

@@ -50,7 +50,6 @@ const WestContainer = () => {
         />
       </div>
       <FormSignModal language={LANGUAGE} id={"formSignInModal"} />
-      <FormSignModal language={LANGUAGE} id={"formSignUpModal"} />
     </div>
   );
 };

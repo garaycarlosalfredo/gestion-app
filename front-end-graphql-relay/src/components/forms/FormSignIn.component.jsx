@@ -3,13 +3,9 @@ import { useContext } from "react";
 import { useCookies } from "react-cookie";
 import { useRelayEnvironment } from "react-relay";
 import { path, prop } from "ramda";
-
 import AuthContext from "../../contexts/auth/authContext";
-
-import Input from "./input/Input.component";
-import SubmitButton from "./input/SubmitButton.component";
+import { Input, SubmitButton } from "../core";
 import SignInUserMutation from "../../mutations/SignInUserMutation.mutation";
-//import styles from "./FormSign.styles";
 const t = require("../../text/text.json");
 
 const FormSignIn = ({ language }) => {
@@ -18,8 +14,6 @@ const FormSignIn = ({ language }) => {
   const authContext = useContext(AuthContext);
   const { isAuthenticated, setCookieUser } = authContext;
   const environment = useRelayEnvironment();
-  //console.log('environment',environment)
-
   //Formik configuration
   const formik = useFormik({
     initialValues: { email: "", password: "" },
@@ -51,40 +45,6 @@ const FormSignIn = ({ language }) => {
         });
     },
   });
-
-  /*
-            <input
-            class="form-control"
-            id="floatingInput"
-            placeholder="name@example.com"
-            type="email"
-            name="email"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.email}
-          />
-          <label for="floatingInput">Email address</label>
-          {formik.errors.email && formik.touched.email && formik.errors.email}
-   */
-
-  /*
-          <div class="form-floating mb-3">
-          <input
-            class="form-control"
-            id="floatingPassword"
-            placeholder="Password"
-            type="password"
-            name="password"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.password}
-          />
-          <label for="floatingPassword">Password</label>
-          {formik.errors.password &&
-            formik.touched.password &&
-            formik.errors.password}
-        </div>
-   */
 
   return (
     <div>

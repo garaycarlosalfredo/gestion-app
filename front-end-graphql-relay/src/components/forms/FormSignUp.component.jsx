@@ -1,11 +1,8 @@
 import React, { useContext } from "react";
 import { useFormik } from "formik";
 import { useRelayEnvironment } from "react-relay";
-import Input from "./input/Input.component";
-import SubmitButton from "./input/SubmitButton.component";
-
+import { Input, SubmitButton } from "../core";
 import AuthContext from "../../contexts/auth/authContext";
-
 import SignUpUserMutation from "../../mutations/SignUpUserMutation.mutation";
 
 const FormSignUp = () => {
@@ -64,7 +61,6 @@ const FormSignUp = () => {
           />
           <Input formik={formik} value={"lastName"} placeholder={"lastName"} />
           <Input formik={formik} value={"numberId"} placeholder={"numberId"} />
-          <Input formik={formik} value={"email"} placeholder={"email"} />
           <Input
             formik={formik}
             value={"email"}

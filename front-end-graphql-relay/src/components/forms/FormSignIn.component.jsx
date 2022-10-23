@@ -6,8 +6,10 @@ import { path, prop } from "ramda";
 
 import AuthContext from "../../contexts/auth/authContext";
 
+import Input from "./input/Input.component";
+import SubmitButton from "./input/SubmitButton.component";
 import SignInUserMutation from "../../mutations/SignInUserMutation.mutation";
-
+//import styles from "./FormSign.styles";
 const t = require("../../text/text.json");
 
 const FormSignIn = ({ language }) => {
@@ -50,42 +52,56 @@ const FormSignIn = ({ language }) => {
     },
   });
 
-  return (
-    <div>
-      <form onSubmit={formik.handleSubmit}>
-        <div>
-          <input
-            placeholder="email"
+  /*
+            <input
+            class="form-control"
+            id="floatingInput"
+            placeholder="name@example.com"
             type="email"
             name="email"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.email}
           />
+          <label for="floatingInput">Email address</label>
           {formik.errors.email && formik.touched.email && formik.errors.email}
-        </div>
-        <div>
+   */
+
+  /*
+          <div class="form-floating mb-3">
           <input
-            placeholder="password"
+            class="form-control"
+            id="floatingPassword"
+            placeholder="Password"
             type="password"
             name="password"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.password}
           />
+          <label for="floatingPassword">Password</label>
           {formik.errors.password &&
             formik.touched.password &&
             formik.errors.password}
         </div>
-        <div>
-          <button
-            type="submit"
-            disabled={formik.isSubmitting}
-            data-bs-dismiss="modal"
-          >
-            Submit
-          </button>
-        </div>
+   */
+
+  return (
+    <div>
+      <form onSubmit={formik.handleSubmit}>
+        <Input
+          formik={formik}
+          value={"email"}
+          type={"email"}
+          placeholder={"Email address"}
+        />
+        <Input
+          formik={formik}
+          value={"password"}
+          type={"password"}
+          placeholder={"password"}
+        />
+        <SubmitButton formik={formik} dismiss={"modal"} text={"Submit"} />
       </form>
     </div>
   );

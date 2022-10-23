@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { useFormik } from "formik";
 import { useRelayEnvironment } from "react-relay";
+import Input from "./input/Input.component";
+import SubmitButton from "./input/SubmitButton.component";
 
 import AuthContext from "../../contexts/auth/authContext";
 
@@ -55,89 +57,28 @@ const FormSignUp = () => {
     <div>
       <div>
         <form onSubmit={formik.handleSubmit}>
-          <div>
-            <input
-              placeholder="firstName"
-              type="firstName"
-              name="firstName"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.firstName}
-            />
-            {formik.errors.firstName &&
-              formik.touched.firstName &&
-              formik.errors.firstName}
-          </div>
-          <div>
-            <input
-              placeholder="lastName"
-              type="lastName"
-              name="lastName"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.lastName}
-            />
-            {formik.errors.lastName &&
-              formik.touched.lastName &&
-              formik.errors.lastName}
-          </div>
-          <div>
-            <input
-              placeholder="numberId"
-              type="numberId"
-              name="numberId"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.numberId}
-            />
-            {formik.errors.numberId &&
-              formik.touched.numberId &&
-              formik.errors.numberId}
-          </div>
-          <div>
-            <input
-              placeholder="email"
-              type="email"
-              name="email"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.email}
-            />
-            {formik.errors.email && formik.touched.email && formik.errors.email}
-          </div>
-          <div>
-            <input
-              placeholder="phone"
-              type="phone"
-              name="phone"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.phone}
-            />
-            {formik.errors.phone && formik.touched.phone && formik.errors.phone}
-          </div>
-          <div>
-            <input
-              placeholder="password"
-              type="password"
-              name="password"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.password}
-            />
-            {formik.errors.password &&
-              formik.touched.password &&
-              formik.errors.password}
-          </div>
-          <div>
-            <button
-              type="submit"
-              disabled={formik.isSubmitting}
-              data-bs-dismiss="modal"
-            >
-              Submit
-            </button>
-          </div>
+          <Input
+            formik={formik}
+            value={"firstName"}
+            placeholder={"firstName"}
+          />
+          <Input formik={formik} value={"lastName"} placeholder={"lastName"} />
+          <Input formik={formik} value={"numberId"} placeholder={"numberId"} />
+          <Input formik={formik} value={"email"} placeholder={"email"} />
+          <Input
+            formik={formik}
+            value={"email"}
+            type={"email"}
+            placeholder={"Email address"}
+          />
+          <Input formik={formik} value={"phone"} placeholder={"phone"} />
+          <Input
+            formik={formik}
+            value={"password"}
+            type={"password"}
+            placeholder={"password"}
+          />
+          <SubmitButton formik={formik} dismiss={"modal"} text={"Submit"} />
         </form>
       </div>
     </div>

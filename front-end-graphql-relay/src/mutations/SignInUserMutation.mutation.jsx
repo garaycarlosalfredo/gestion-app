@@ -25,6 +25,7 @@ function SignInUserMutation(environment, input) {
   const variables = {
     input,
   };
+  console.log("input", input);
 
   return new Promise((resolve, reject) => {
     commitMutation(environment, {

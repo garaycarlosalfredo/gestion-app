@@ -14,6 +14,7 @@ import RelayEnvironment from "./RelayEnvironment";
 import fetchGraphQL from "./fetchGraphQL";
 import HomeContainer from "./pages/HomeContainer.container";
 import NavbarComponent from "./components/layout/Navbar.component";
+import NavbarHover from "./components/layout/NavbarHover.component";
 import AuthState from "./contexts/auth/authState";
 
 const { Suspense } = React;
@@ -52,7 +53,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <NavbarComponent></NavbarComponent>
+        <NavbarHover />
+        {true ? <NavbarComponent></NavbarComponent> : null}
       </header>
       <HomeContainer></HomeContainer>
     </div>

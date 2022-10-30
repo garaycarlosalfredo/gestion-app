@@ -1,8 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import AuthContext from "../../contexts/auth/authContext";
-import FormSignModal from "../../components/modal/FormSignModal.component";
-import CardSign from "../../components/cards/CardSign.component";
+import FormModal from "../../components/layout/modal/FormModal.comonent";
+import FormSignIn from "../../components/layout/forms/FormSignIn.component";
+import FormSignUp from "../../components/layout/forms/FormSignUp.component";
+
+import FormCard from "../../components/layout/card/FormCard.component";
 
 const LANGUAGE = "es";
 
@@ -34,22 +37,33 @@ const WestContainer = () => {
   return (
     <div>
       <div className="d-flex justify-content-center">
-        <CardSign
-          language={LANGUAGE}
-          modal={"user"}
-          idModal={"formSignInModal"}
-          icon={"bi bi-person-check"}
-          onClickHandle={handleSignInSelection}
-        />
-        <CardSign
-          language={LANGUAGE}
-          modal={"west"}
-          idModal={"formSignUpModal"}
-          icon={"bi bi-person-plus"}
-          onClickHandle={handleSignUpSelection}
-        />
+        <FormCard
+          cardClass={"m-2"}
+          cardTitle={"Ya soy un usuario"}
+          cardText={"Si ya sos un usuario registrado, igresa por aquí"}
+        >
+          <FormModal
+            modalTitle={"Titulo del modal"}
+            optionalCloseCondition={!isAuthenticated}
+            buttonTitle={"Ingresar"}
+          >
+            <FormSignIn />
+          </FormModal>
+        </FormCard>
+        <FormCard
+          cardClass={"m-2"}
+          cardTitle={"Ya soy un usuario"}
+          cardText={"Si ya sos un usuario registrado, igresa por aquí"}
+        >
+          <FormModal
+            modalTitle={"Titulo del modal"}
+            optionalCloseCondition={!isAuthenticated}
+            buttonTitle={"Ingresar"}
+          >
+            <FormSignUp />
+          </FormModal>
+        </FormCard>
       </div>
-      <FormSignModal language={LANGUAGE} id={"formSignInModal"} />
     </div>
   );
 };

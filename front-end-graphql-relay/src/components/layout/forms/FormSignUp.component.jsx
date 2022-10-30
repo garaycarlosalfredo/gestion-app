@@ -1,13 +1,15 @@
 import React, { useContext } from "react";
 import { useFormik } from "formik";
 import { useRelayEnvironment } from "react-relay";
-import { Input, SubmitButton } from "../core";
-import AuthContext from "../../contexts/auth/authContext";
-import SignUpUserMutation from "../../mutations/SignUpUserMutation.mutation";
+import { Input, SubmitButton } from "../../core";
+import AuthContext from "../../../contexts/auth/authContext";
+import SignUpUserMutation from "../../../mutations/SignUpUserMutation.mutation";
+import { useState } from "react";
 
 const FormSignUp = () => {
   const authContext = useContext(AuthContext);
   const { isAuthenticated, setCookieUser } = authContext;
+  const [submitError, setSubmitError] = useState(false);
 
   const environment = useRelayEnvironment();
 
@@ -42,7 +44,13 @@ const FormSignUp = () => {
             }, 400);*/
       SignUpUserMutation(environment, values)
         .then((response) => {
-          setCookieUser(response.signUpUser);
+          if (response.signUpUser != null) {
+            setCookieUser(response.signUpUser);
+            setSubmitting(false);
+          } else {
+            setSubmitError(true);
+            setSubmitting(false);
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -74,14 +82,20 @@ const FormSignUp = () => {
             type={"password"}
             placeholder={"password"}
           />
-          <SubmitButton formik={formik} dismiss={"modal"} text={"Submit"} />
-          <div class="alert alert-danger" role="alert" id="alert-error-sign-up">
-            This is a danger alert with{" "}
-            <a href="#" class="alert-link">
-              an example link
-            </a>
-            . Give it a click if you like.
-          </div>
+          <SubmitButton formik={formik} text={"Submit"} />
+          {submitError ? (
+            <div
+              class="alert alert-danger"
+              role="alert"
+              id="alert-error-sign-up"
+            >
+              This is a danger alert with{" "}
+              <a href="#" class="alert-link">
+                an example link
+              </a>
+              . Give it a click if you like.
+            </div>
+          ) : null}
         </form>
       </div>
     </div>

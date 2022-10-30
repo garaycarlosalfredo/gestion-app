@@ -21,6 +21,7 @@ function NavbarHover() {
   };
 
   const menu = menuRef.current.getBoundingClientRect();
+
   console.log(menu.bottom);
 
   return (

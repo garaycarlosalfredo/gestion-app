@@ -53,7 +53,6 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <NavbarHover />
         {true ? <NavbarComponent></NavbarComponent> : null}
       </header>
       <HomeContainer></HomeContainer>

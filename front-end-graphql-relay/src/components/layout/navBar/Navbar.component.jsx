@@ -1,7 +1,7 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { NavDropdown } from "react-bootstrap";
+import { NavDropdown, Stack } from "react-bootstrap";
 import FormModal from "../modal/FormModal.comonent";
 import FormSignIn from "../forms/FormSignIn.component";
 import FormSignUp from "../forms/FormSignUp.component";
@@ -30,26 +30,34 @@ function NavbarComponent(args) {
             <Nav.Link href="#home">Home</Nav.Link>
             <Nav.Link href="#features">Features</Nav.Link>
             <Nav.Link href="#pricing">Pricing</Nav.Link>
-            <NavDropdown title="Link" id="navbarScrollingDropdown">
-              <FormModal
-                isDropDownItem={true}
-                modalTitle={"Titulo del modal"}
-                optionalCloseCondition={isAuthenticated}
-                buttonTitle={"Ingresar"}
-              >
-                <FormSignIn></FormSignIn>
-              </FormModal>
-              <FormModal
-                isDropDownItem={true}
-                modalTitle={"Titulo del modal"}
-                optionalCloseCondition={isAuthenticated}
-                buttonTitle={"Registrarse"}
-              >
-                <FormSignUp></FormSignUp>
-              </FormModal>
-              <NavDropdown.Item href="#action4" onClick={removeCookieUser}>
-                Salir
-              </NavDropdown.Item>
+          </Nav>
+          <Nav className="justify-content-end">
+            <NavDropdown title="Ingresar" id="navbarScrollingDropdown">
+              {!isAuthenticated && (
+                <FormModal
+                  isDropDownItem={true}
+                  modalTitle={"Titulo del modal"}
+                  optionalCloseCondition={isAuthenticated}
+                  buttonTitle={"Mi cuenta"}
+                >
+                  <FormSignIn></FormSignIn>
+                </FormModal>
+              )}
+              {!isAuthenticated && (
+                <FormModal
+                  isDropDownItem={true}
+                  modalTitle={"Titulo del modal"}
+                  optionalCloseCondition={isAuthenticated}
+                  buttonTitle={"Registrarse"}
+                >
+                  <FormSignUp></FormSignUp>
+                </FormModal>
+              )}
+              {isAuthenticated && (
+                <NavDropdown.Item href="#action4" onClick={removeCookieUser}>
+                  Salir
+                </NavDropdown.Item>
+              )}
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action5">Cancelar</NavDropdown.Item>
             </NavDropdown>

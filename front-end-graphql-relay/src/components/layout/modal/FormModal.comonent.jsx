@@ -5,8 +5,12 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 
+import { NavDropdown } from "react-bootstrap";
+
 function FormModal(props) {
   const {
+    isButton,
+    isDropDownItem,
     externalShow,
     optionalCloseCondition,
     modalTitle,
@@ -33,12 +37,18 @@ function FormModal(props) {
     }
   }, [optionalCloseCondition]);
 
+  console.log("optionalCloseCondition", optionalCloseCondition);
+  console.log("show", show);
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        {buttonTitle}
-      </Button>
-
+      {isButton && (
+        <Button variant="primary" onClick={handleShow}>
+          {buttonTitle}
+        </Button>
+      )}
+      {isDropDownItem && (
+        <NavDropdown.Item onClick={handleShow}>{buttonTitle}</NavDropdown.Item>
+      )}
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>{modalTitle}</Modal.Title>

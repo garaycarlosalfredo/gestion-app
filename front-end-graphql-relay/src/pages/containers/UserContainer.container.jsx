@@ -7,7 +7,7 @@ import PacientContainer from "./PacientContainer.container";
 const UserContainer = (props) => {
   const authContext = useContext(AuthContext);
   const { isAuthenticated, user } = authContext;
-  console.log(user.firstName);
+  //console.log(user.firstName);
   return (
     <div>
       User Container {user.lastName} {user.firstName}

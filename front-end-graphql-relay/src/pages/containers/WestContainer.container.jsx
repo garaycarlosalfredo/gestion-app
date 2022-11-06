@@ -37,32 +37,38 @@ const WestContainer = () => {
   return (
     <div>
       <div className="d-flex justify-content-center">
-        <FormCard
-          cardClass={"m-2"}
-          cardTitle={"Ya soy un usuario"}
-          cardText={"Si ya sos un usuario registrado, igresa por aquí"}
-        >
-          <FormModal
-            modalTitle={"Titulo del modal"}
-            optionalCloseCondition={!isAuthenticated}
-            buttonTitle={"Ingresar"}
+        {false && (
+          <FormCard
+            cardClass={"m-2"}
+            cardTitle={"Ya soy un usuario"}
+            cardText={"Si ya sos un usuario registrado, igresa por aquí"}
           >
-            <FormSignIn />
-          </FormModal>
-        </FormCard>
-        <FormCard
-          cardClass={"m-2"}
-          cardTitle={"Ya soy un usuario"}
-          cardText={"Si ya sos un usuario registrado, igresa por aquí"}
-        >
-          <FormModal
-            modalTitle={"Titulo del modal"}
-            optionalCloseCondition={!isAuthenticated}
-            buttonTitle={"Ingresar"}
+            <FormModal
+              isButton={true}
+              modalTitle={"Titulo del modal"}
+              optionalCloseCondition={!isAuthenticated}
+              buttonTitle={"Ingresar"}
+            >
+              <FormSignIn />
+            </FormModal>
+          </FormCard>
+        )}
+        {false && (
+          <FormCard
+            cardClass={"m-2"}
+            cardTitle={"Ya soy un usuario"}
+            cardText={"Si ya sos un usuario registrado, igresa por aquí"}
           >
-            <FormSignUp />
-          </FormModal>
-        </FormCard>
+            <FormModal
+              isButton={true}
+              modalTitle={"Titulo del modal"}
+              optionalCloseCondition={!isAuthenticated}
+              buttonTitle={"Ingresar"}
+            >
+              <FormSignUp />
+            </FormModal>
+          </FormCard>
+        )}
       </div>
     </div>
   );

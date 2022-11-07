@@ -20,9 +20,9 @@ function NavbarHover() {
     setShowOption(left);
   };
 
-  const menu = menuRef.current.getBoundingClientRect();
+  const menu = menuRef.current?.getBoundingClientRect();
 
-  console.log(menu.bottom);
+  console.log(menu);
 
   return (
     <div ref={menuRef}>
@@ -57,7 +57,7 @@ function NavbarHover() {
 
       <div
         class="position-absolute w-100 h-20"
-        style={{ "z-index": "9999", top: `${menu.bottom}` }}
+        //style={{ "z-index": "9999", top: `${menu.bottom}` }}
         onMouseLeave={() => {
           onLeave("");
         }}

@@ -13,7 +13,7 @@ import {
 import RelayEnvironment from "./RelayEnvironment";
 import fetchGraphQL from "./fetchGraphQL";
 import HomeContainer from "./pages/HomeContainer.container";
-import NavbarComponent from "./components/layout/navBar/Navbar.component";
+import NavbarWithHover from "./components/layout/navBar/NavbarWithHover.component";
 import NavbarHover from "./components/layout/NavbarHover.component";
 import AuthState from "./contexts/auth/authState";
 
@@ -53,7 +53,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <NavbarComponent></NavbarComponent>
+        <NavbarWithHover></NavbarWithHover>
       </header>
       <HomeContainer></HomeContainer>
     </div>

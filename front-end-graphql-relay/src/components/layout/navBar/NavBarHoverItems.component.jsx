@@ -7,7 +7,7 @@ function NavBarHoverItems({ onMouseLeave, children }) {
         onMouseLeave("");
       }}
     >
-      <div className="bg-primary">{children}</div>
+      <div className="bg-light">{children}</div>
     </div>
   );
 }

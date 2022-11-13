@@ -11,7 +11,7 @@ import NavBarHoverItems from "./NavBarHoverItems.component";
 import NavBarHoverItem from "./NavBarHoverItem.component";
 
 import AuthContext from "../../../contexts/auth/authContext";
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 
 function NavbarComponent(args) {
   const { children, varian, theme } = args;
@@ -32,7 +32,14 @@ function NavbarComponent(args) {
       title: "Home",
       dataInfo: {
         title: "Info Home 1",
-        data: [{ title: "Data 1" }],
+        data: [
+          {
+            title: "Data 1",
+            text: "data1 content",
+            href: "#data1",
+            buttonName: "click data32",
+          },
+        ],
       },
     },
     {
@@ -40,7 +47,20 @@ function NavbarComponent(args) {
       title: "Home2",
       dataInfo: {
         title: "Info Home 2",
-        data: [{ title: "Data 2" }, { title: "Data 21" }],
+        data: [
+          {
+            title: "Data 2",
+            text: "data2 content",
+            href: "#data2",
+            buttonName: "click data32",
+          },
+          {
+            title: "Data 21",
+            text: "data21 content",
+            href: "#data21",
+            buttonName: "click data32",
+          },
+        ],
       },
     },
     {
@@ -48,7 +68,24 @@ function NavbarComponent(args) {
       title: "Home3",
       dataInfo: {
         title: "Info Home 3",
-        data: [{ title: "Data 3" }, { title: "Data 31" }, { title: "Data 32" }],
+        data: [
+          {
+            title: "Data 3",
+            text: "data3 content",
+            href: "#data3",
+            buttonName: "click data32",
+          },
+          {
+            title: "Data 31",
+            href: "#data31",
+            buttonName: "click data32",
+          },
+          {
+            title: "Data 32",
+            text: "data32 content",
+            href: "#data32",
+          },
+        ],
       },
     },
   ];
@@ -75,9 +112,13 @@ function NavbarComponent(args) {
     find(propEq("href", showOption))
   );
 
+  const menuRef = useRef(null);
+  const menu = menuRef.current?.getBoundingClientRect();
+  console.log("[menu]", menu);
+
   return (
     <>
-      <Navbar bg={theme || "dark"} variant={varian || "dark"}>
+      <Navbar bg={theme || "dark"} variant={varian || "dark"} ref={menuRef}>
         <Container>
           <Navbar.Brand href="#home">Navbar</Navbar.Brand>
           <Nav className="me-auto">
@@ -92,7 +133,7 @@ function NavbarComponent(args) {
               );
             })}
           </Nav>
-          <Nav className="justify-content-end">
+          <Nav className="justify-content-end z-3">
             <NavDropdown title="Ingresar" id="navbarScrollingDropdown">
               {!isAuthenticated && (
                 <FormModal
@@ -125,11 +166,16 @@ function NavbarComponent(args) {
           </Nav>
         </Container>
       </Navbar>
-      <NavBarHoverItems onMouseLeave={onLeave}>
-        <NavBarHoverItem
-          component={getDataInfo(MenuItemList)}
-        ></NavBarHoverItem>
-      </NavBarHoverItems>
+      <div
+        class="position-absolute w-100 h-20 border border-black z-2"
+        style={{ top: `${menu?.bottom}` }}
+      >
+        <NavBarHoverItems onMouseLeave={onLeave}>
+          <NavBarHoverItem
+            component={getDataInfo(MenuItemList)}
+          ></NavBarHoverItem>
+        </NavBarHoverItems>
+      </div>
     </>
   );
 }

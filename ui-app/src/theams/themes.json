@@ -1,0 +1,8 @@
+{
+    "defaultTheme": {
+        "bgColor": "white",
+        "bgColorHover": "light-blue",
+        "borderColor": "light-blue",
+        "borderColorHover": "blue"
+    }
+}

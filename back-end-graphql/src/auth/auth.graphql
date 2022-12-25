@@ -1,0 +1,28 @@
+# import errorResponse from "../errorHandle/error.graphql"
+# import User from "../user/user.graphql"
+
+input UserSignIn {
+  email: String
+  password: String
+}
+
+input UserSignUp {
+  firstName: String
+  lastName: String
+  numberId: String
+  email: String
+  phone: String
+  password: String
+}
+
+type Mutation {
+  signInUser(input: UserSignIn): authResponse
+  signUpUser(input: UserSignUp): authResponse
+}
+
+type authSuccessResponse {
+  token: String
+  user: User
+}
+
+union authResponse = authSuccessResponse | errorResponse

@@ -1,7 +1,7 @@
 const { ApolloError } = require("apollo-server");
-const User = require("../../../model/User");
+const User = require("../user/user.schema");
 const bcryptjs = require("bcryptjs");
-const { errorMessage } = require("../../errorHandle/errorTypes");
+const { errorMessage } = require("../errorHandle/error");
 const jwt = require("jsonwebtoken");
 const { applySpec, mergeLeft } = require("ramda");
 

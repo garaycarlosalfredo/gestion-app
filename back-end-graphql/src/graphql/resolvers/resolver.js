@@ -1,11 +1,11 @@
-const { getAllUserList, resolveTypeUser } = require("./user/userResolver");
+const { getAllUserList, resolveTypeUser } = require("../../user/user");
 const { getActivityList } = require("./activity/activityResolver");
 const {
   getAllTeamList,
   createTeam,
   resolveTypeTeam,
 } = require("./team/teamResolver");
-const { signUp, signIn, resolveTypeAuth } = require("./auth/authResolver");
+const { signUp, signIn, resolveTypeAuth } = require("../../auth/auth");
 
 const resolvers = {
   Query: {

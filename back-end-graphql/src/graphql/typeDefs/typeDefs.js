@@ -3,13 +3,16 @@ const {
   createTypeDefsFromModel,
   createTypeDefsFromObject,
 } = require("../../util/typeDefs/typeDefs");
-const User = require("../../model/User");
+const User = require("../../user/user.schema");
 const Team = require("../../model/Team");
 const Activity = require("../../model/Activity");
-const { errorMessage } = require("../errorHandle/errorTypes");
+const { errorMessage } = require("../../errorHandle/error");
 
 //console.log(createTypeDefsFromObject('errorResponse',errorMessage('String')))
-
+console.log(
+  "createTypeDefsFromObject",
+  createTypeDefsFromObject("errorResponse", errorMessage("String!"))
+);
 const typeDefs = gql`
   scalar Date
 

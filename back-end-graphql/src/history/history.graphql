@@ -32,8 +32,13 @@ input HistoryUpdated {
   appointment: [AppointmentInput]
 }
 
+input userIdInput {
+  userId: String
+}
+
 type Mutation {
   updateHistory(input: HistoryUpdated): historyResponse
+  getUserHistory(input: userIdInput): historyResponse
 }
 
 type historySuccessResponse {

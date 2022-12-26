@@ -24,14 +24,27 @@ exports.updateHistory = async (root, args) => {
     history.updated = Date.now();
     await history.save();
 
-    return {
-      history: history,
-    };
+    return { history };
   } catch (error) {
     console.log(
       "error al intentar actualizar el historial del un usuario : ",
       error
     );
+    return { message: "error" };
+  }
+};
+
+exports.getUserHistory = async (root, args) => {
+  const { input } = args;
+  try {
+    const { userId } = input;
+    // Search user history
+    const history = await History.findOne({ userId });
+    console.log("userHistory", history);
+    return history ? { history } : { message: "No history available" };
+  } catch (error) {
+    console.error("erorr al intentar buscar el historial del usuario", error);
+    res.status(400).send("hubo un error");
     return { message: "error" };
   }
 };

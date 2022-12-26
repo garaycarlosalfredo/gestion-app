@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 
 const HistorySchema = mongoose.Schema({
+  _id: {
+    type: mongoose.ObjectId,
+    required: true,
+    alias: "String",
+  },
   userId: {
     type: String,
     required: true,

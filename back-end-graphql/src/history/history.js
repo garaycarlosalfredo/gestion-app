@@ -39,7 +39,7 @@ exports.getUserHistory = async (root, args) => {
   try {
     const { userId } = input;
     // Search user history
-    const history = await History.findOne({ userId });
+    const history = await History.find({ userId });
     console.log("userHistory", history);
     return history ? { history } : { message: "No history available" };
   } catch (error) {

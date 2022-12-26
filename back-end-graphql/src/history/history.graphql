@@ -42,7 +42,7 @@ type Mutation {
 }
 
 type historySuccessResponse {
-  history: History
+  history: [History]
 }
 
 union historyResponse = historySuccessResponse | errorResponse

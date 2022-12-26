@@ -21,9 +21,7 @@ import { path, prop } from "ramda";
 
 const buttonsClass = "d-block m-1 w-100";
 
-//Seguir
 const mutationRequest = (values, environment, setUserHistory) => {
-  console.log("history required");
   GetUserHistory(environment, values)
     .then((response) => {
       const HistoryResponse = prop("getUserHistory", response);

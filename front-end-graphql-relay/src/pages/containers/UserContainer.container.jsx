@@ -12,25 +12,23 @@ import PacientContainer from "./PacientContainer.container";
 
 import GetUserHistory from "../../mutations/GetUserHistory.mutation";
 
-import { CardUser } from "../../components/core";
+import { CardUser, ListHistory } from "../../components/core";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
 import { useRelayEnvironment } from "react-relay";
+import { path, prop } from "ramda";
 
 const buttonsClass = "d-block m-1 w-100";
 
 //Seguir
-const mutationRequest = (values, environment) => {
+const mutationRequest = (values, environment, setUserHistory) => {
   console.log("history required");
   GetUserHistory(environment, values)
     .then((response) => {
-      if (response.history != null) {
-        console.log("response.history", response.history);
-      } else {
-        console.log(response);
-        console.log("response error", response);
-      }
+      const HistoryResponse = prop("getUserHistory", response);
+      console.log("HistoryResponse", HistoryResponse);
+      setUserHistory(HistoryResponse);
     })
     .catch((err) => {
       console.log("err = ", err);
@@ -42,7 +40,9 @@ const UserContainer = (props) => {
   const authContext = useContext(AuthContext);
   const { isAuthenticated, user } = authContext;
   //console.log(user.firstName);
-  const [userHistoty, setUserHistory] = useState([]);
+  const [userHistory, setUserHistory] = useState(null);
+
+  console.log("userHistory", userHistory);
   return (
     <div>
       <Card className="m-1">
@@ -55,7 +55,11 @@ const UserContainer = (props) => {
                   <Button
                     className={buttonsClass}
                     onClick={() => {
-                      mutationRequest({ userId: user._id }, environment);
+                      mutationRequest(
+                        { userId: user._id },
+                        environment,
+                        setUserHistory
+                      );
                     }}
                   >
                     Ver historial
@@ -69,6 +73,21 @@ const UserContainer = (props) => {
           </div>
         </Card.Body>
       </Card>
+      {userHistory && (
+        <Card className="m-1">
+          <Card.Title className="m-1">historial</Card.Title>
+          {userHistory?.history ? (
+            <Card.Body>
+              {userHistory?.history.title}
+              <ListHistory
+                infoList={userHistory?.history.appointment}
+              ></ListHistory>
+            </Card.Body>
+          ) : (
+            <p>{userHistory?.message}</p>
+          )}
+        </Card>
+      )}
       <ProfecionalContainer></ProfecionalContainer>
       <PacientContainer></PacientContainer>
     </div>

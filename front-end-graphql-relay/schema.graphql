@@ -4,13 +4,14 @@ directive @specifiedBy(
   url: String!
 ) on SCALAR
 
-type Activity {
-  name: String
-  creator: String
-  created: Date
-  updated: Date
-  teams: [Team]
-  _id: String
+type Appointment {
+  date: Date
+  information: String
+}
+
+input AppointmentInput {
+  date: Date
+  information: String
 }
 
 union authResponse = authSuccessResponse | errorResponse
@@ -26,36 +27,40 @@ type errorResponse {
   message: String!
 }
 
+type History {
+  user: String
+  title: String
+  description: String
+  createDate: Date
+  updated: Date
+  tags: [String]
+  appointment: [Appointment]
+}
+
+union historyResponse = historySuccessResponse | errorResponse
+
+type historySuccessResponse {
+  history: History
+}
+
+input HistoryUpdated {
+  userId: String
+  title: String
+  description: String
+  createDate: Date
+  updated: Date
+  tags: [String]
+  appointment: [AppointmentInput]
+}
+
 type Mutation {
   signInUser(input: UserSignIn): authResponse
   signUpUser(input: UserSignUp): authResponse
-  createTeam(name: String, status: Boolean, created: Date, updated: Date, members: [String]): teamResponse
+  updateHistory(input: HistoryUpdated): historyResponse
 }
 
 type Query {
   usersList: [User]
-  activityList: [Activity]
-  teamList: [Team]
-}
-
-type SignInResponse {
-  token: String
-  message: String
-}
-
-type Team {
-  name: String
-  status: Boolean
-  created: Date
-  updated: Date
-  members: [User]
-  _id: String
-}
-
-union teamResponse = teamSuccessResponse | errorResponse
-
-type teamSuccessResponse {
-  team: Team
 }
 
 type User {

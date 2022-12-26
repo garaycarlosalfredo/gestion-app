@@ -6,7 +6,7 @@ function SubmitButton({ formik, dismiss, type, text, classes }) {
       <button
         className="submit-button btn btn-primary mb-3"
         type={type || "submit"}
-        disabled={formik.isSubmitting}
+        disabled={formik?.isSubmitting}
         data-bs-dismiss={dismiss}
       >
         {text}

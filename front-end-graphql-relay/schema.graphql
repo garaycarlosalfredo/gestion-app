@@ -57,6 +57,7 @@ type Mutation {
   signInUser(input: UserSignIn): authResponse
   signUpUser(input: UserSignUp): authResponse
   updateHistory(input: HistoryUpdated): historyResponse
+  getUserHistory(input: userIdInput): historyResponse
 }
 
 type Query {
@@ -72,6 +73,10 @@ type User {
   password: String
   createDate: Date
   _id: String
+}
+
+input userIdInput {
+  userId: String
 }
 
 union userResponse = userSuccessResponse | errorResponse

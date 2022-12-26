@@ -10,20 +10,39 @@ import AuthContext from "../../contexts/auth/authContext";
 import ProfecionalContainer from "./ProfecionalContainer.container";
 import PacientContainer from "./PacientContainer.container";
 
+import GetUserHistory from "../../mutations/GetUserHistory.mutation";
+
 import { CardUser } from "../../components/core";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
+import { useRelayEnvironment } from "react-relay";
+
 const buttonsClass = "d-block m-1 w-100";
 
+//Seguir
+const mutationRequest = (values, environment) => {
+  console.log("history required");
+  GetUserHistory(environment, values)
+    .then((response) => {
+      if (response.history != null) {
+        console.log("response.history", response.history);
+      } else {
+        console.log(response);
+        console.log("response error", response);
+      }
+    })
+    .catch((err) => {
+      console.log("err = ", err);
+    });
+};
+
 const UserContainer = (props) => {
+  const environment = useRelayEnvironment();
   const authContext = useContext(AuthContext);
   const { isAuthenticated, user } = authContext;
   //console.log(user.firstName);
   const [userHistoty, setUserHistory] = useState([]);
-  useMemo(() => {
-    console.log("userHistoty", userHistoty);
-  }, [userHistoty]);
   return (
     <div>
       <Card className="m-1">
@@ -33,7 +52,14 @@ const UserContainer = (props) => {
             <Card className="m-1 w-100 h-auto">
               <Card.Body className="d-flex justify-content-center">
                 <div>
-                  <Button className={buttonsClass}>Ver historial</Button>
+                  <Button
+                    className={buttonsClass}
+                    onClick={() => {
+                      mutationRequest({ userId: user._id }, environment);
+                    }}
+                  >
+                    Ver historial
+                  </Button>
                   <Button className={buttonsClass}>Buscar turno</Button>
                   <Button className={buttonsClass}>Buscar Resultado</Button>
                   <Button className={buttonsClass}>Pedir turno</Button>

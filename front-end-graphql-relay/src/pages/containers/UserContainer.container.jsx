@@ -85,6 +85,16 @@ const UserContainer = (props) => {
           ) : (
             <p>{userAppointment?.message}</p>
           )}
+          <div>
+            <Button
+              className={"m-1 ww-25"}
+              onClick={() => {
+                setUserAppointment(false);
+              }}
+            >
+              cerrar
+            </Button>
+          </div>
         </Card>
       )}
       <ProfecionalContainer></ProfecionalContainer>

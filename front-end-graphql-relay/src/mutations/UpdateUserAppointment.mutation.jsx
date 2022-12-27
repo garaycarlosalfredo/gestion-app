@@ -2,20 +2,16 @@ import graphql from "babel-plugin-relay/macro";
 import { commitMutation } from "react-relay";
 
 const mutation = graphql`
-  mutation GetUserHistoryMutation($input: userIdInput) {
-    getUserHistory(input: $input) {
-      ... on historySuccessResponse {
-        history {
+  mutation UpdateUserAppointmentMutation($input: userIdInput) {
+    getUserAppointments(input: $input) {
+      ... on appointmentsSuccessResponse {
+        appointment {
           user
           title
           description
           createDate
           updated
           tags
-          appointment {
-            date
-            information
-          }
         }
       }
       ... on errorResponse {
@@ -25,7 +21,7 @@ const mutation = graphql`
   }
 `;
 
-function GetUserHistoryMutation(environment, input) {
+function UpdateUserAppointmentMutation(environment, input) {
   const variables = {
     input,
   };
@@ -48,4 +44,4 @@ function GetUserHistoryMutation(environment, input) {
   });
 }
 
-export default GetUserHistoryMutation;
+export default UpdateUserAppointmentMutation;

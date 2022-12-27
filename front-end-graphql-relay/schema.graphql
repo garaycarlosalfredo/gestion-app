@@ -5,13 +5,33 @@ directive @specifiedBy(
 ) on SCALAR
 
 type Appointment {
-  date: Date
-  information: String
+  user: String
+  title: String
+  description: String
+  createDate: Date
+  updated: Date
+  tags: [String]
 }
 
-input AppointmentInput {
-  date: Date
-  information: String
+union appointmentResponse = appointmentSuccessResponse | errorResponse
+
+union appointmentsResponse = appointmentsSuccessResponse | errorResponse
+
+type appointmentsSuccessResponse {
+  appointment: [Appointment]
+}
+
+type appointmentSuccessResponse {
+  appointment: Appointment
+}
+
+input AppointmentUpdated {
+  userId: String
+  title: String
+  description: String
+  createDate: Date
+  updated: Date
+  tags: [String]
 }
 
 union authResponse = authSuccessResponse | errorResponse
@@ -27,37 +47,11 @@ type errorResponse {
   message: String!
 }
 
-type History {
-  user: String
-  title: String
-  description: String
-  createDate: Date
-  updated: Date
-  tags: [String]
-  appointment: [Appointment]
-}
-
-union historyResponse = historySuccessResponse | errorResponse
-
-type historySuccessResponse {
-  history: History
-}
-
-input HistoryUpdated {
-  userId: String
-  title: String
-  description: String
-  createDate: Date
-  updated: Date
-  tags: [String]
-  appointment: [AppointmentInput]
-}
-
 type Mutation {
+  updateAppointment(input: AppointmentUpdated): appointmentResponse
+  getUserAppointments(input: userIdInput): appointmentsResponse
   signInUser(input: UserSignIn): authResponse
   signUpUser(input: UserSignUp): authResponse
-  updateHistory(input: HistoryUpdated): historyResponse
-  getUserHistory(input: userIdInput): historyResponse
 }
 
 type Query {

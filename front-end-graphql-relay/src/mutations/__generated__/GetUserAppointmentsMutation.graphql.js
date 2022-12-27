@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<23577de549ea4c416819f5c5478c9751>>
+ * @generated SignedSource<<619f86efa77c20c0e0b395ea72c50776>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -29,10 +29,10 @@ v2 = {
     {
       "alias": null,
       "args": null,
-      "concreteType": "History",
+      "concreteType": "Appointment",
       "kind": "LinkedField",
-      "name": "history",
-      "plural": false,
+      "name": "appointment",
+      "plural": true,
       "selections": [
         {
           "alias": null,
@@ -75,37 +75,12 @@ v2 = {
           "kind": "ScalarField",
           "name": "tags",
           "storageKey": null
-        },
-        {
-          "alias": null,
-          "args": null,
-          "concreteType": "Appointment",
-          "kind": "LinkedField",
-          "name": "appointment",
-          "plural": true,
-          "selections": [
-            {
-              "alias": null,
-              "args": null,
-              "kind": "ScalarField",
-              "name": "date",
-              "storageKey": null
-            },
-            {
-              "alias": null,
-              "args": null,
-              "kind": "ScalarField",
-              "name": "information",
-              "storageKey": null
-            }
-          ],
-          "storageKey": null
         }
       ],
       "storageKey": null
     }
   ],
-  "type": "historySuccessResponse",
+  "type": "appointmentsSuccessResponse",
   "abstractKey": null
 },
 v3 = {
@@ -127,14 +102,14 @@ return {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
-    "name": "GetUserHistoryMutation",
+    "name": "GetUserAppointmentsMutation",
     "selections": [
       {
         "alias": null,
         "args": (v1/*: any*/),
         "concreteType": null,
         "kind": "LinkedField",
-        "name": "getUserHistory",
+        "name": "getUserAppointments",
         "plural": false,
         "selections": [
           (v2/*: any*/),
@@ -150,14 +125,14 @@ return {
   "operation": {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
-    "name": "GetUserHistoryMutation",
+    "name": "GetUserAppointmentsMutation",
     "selections": [
       {
         "alias": null,
         "args": (v1/*: any*/),
         "concreteType": null,
         "kind": "LinkedField",
-        "name": "getUserHistory",
+        "name": "getUserAppointments",
         "plural": false,
         "selections": [
           {
@@ -175,16 +150,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "6e5e93c2bff5657de858dabb00f6d7fa",
+    "cacheID": "f680c75221851811705680db481fbd36",
     "id": null,
     "metadata": {},
-    "name": "GetUserHistoryMutation",
+    "name": "GetUserAppointmentsMutation",
     "operationKind": "mutation",
-    "text": "mutation GetUserHistoryMutation(\n  $input: userIdInput\n) {\n  getUserHistory(input: $input) {\n    __typename\n    ... on historySuccessResponse {\n      history {\n        user\n        title\n        description\n        createDate\n        updated\n        tags\n        appointment {\n          date\n          information\n        }\n      }\n    }\n    ... on errorResponse {\n      message\n    }\n  }\n}\n"
+    "text": "mutation GetUserAppointmentsMutation(\n  $input: userIdInput\n) {\n  getUserAppointments(input: $input) {\n    __typename\n    ... on appointmentsSuccessResponse {\n      appointment {\n        user\n        title\n        description\n        createDate\n        updated\n        tags\n      }\n    }\n    ... on errorResponse {\n      message\n    }\n  }\n}\n"
   }
 };
 })();
 
-node.hash = "6a512c3ca3e8d76e86f4b6bdf4a69737";
+node.hash = "34483ac572b4604cf8d52c3ba5a5348d";
 
 module.exports = node;

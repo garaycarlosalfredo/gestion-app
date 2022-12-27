@@ -10,9 +10,9 @@ import AuthContext from "../../contexts/auth/authContext";
 import ProfecionalContainer from "./ProfecionalContainer.container";
 import PacientContainer from "./PacientContainer.container";
 
-import GetUserHistory from "../../mutations/GetUserHistory.mutation";
+import GetUserAppointments from "../../mutations/GetUserAppointments.mutation";
 
-import { CardUser, ListHistory } from "../../components/core";
+import { CardUser, ListAppointment } from "../../components/core";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
@@ -21,12 +21,13 @@ import { path, prop } from "ramda";
 
 const buttonsClass = "d-block m-1 w-100";
 
-const mutationRequest = (values, environment, setUserHistory) => {
-  GetUserHistory(environment, values)
+const mutationRequest = (values, environment, setUserAppointment) => {
+  GetUserAppointments(environment, values)
     .then((response) => {
-      const HistoryResponse = prop("getUserHistory", response);
-      console.log("HistoryResponse", HistoryResponse);
-      setUserHistory(HistoryResponse);
+      console.log("response row", response);
+      const AppointmentResponse = prop("getUserAppointments", response);
+      console.log("AppointmentResponse", AppointmentResponse);
+      setUserAppointment(AppointmentResponse);
     })
     .catch((err) => {
       console.log("err = ", err);
@@ -38,9 +39,9 @@ const UserContainer = (props) => {
   const authContext = useContext(AuthContext);
   const { isAuthenticated, user } = authContext;
   //console.log(user.firstName);
-  const [userHistory, setUserHistory] = useState(null);
+  const [userAppointment, setUserAppointment] = useState(null);
 
-  console.log("userHistory", userHistory);
+  console.log("userApointments", userAppointment);
   return (
     <div>
       <Card className="m-1">
@@ -56,7 +57,7 @@ const UserContainer = (props) => {
                       mutationRequest(
                         { userId: user._id },
                         environment,
-                        setUserHistory
+                        setUserAppointment
                       );
                     }}
                   >
@@ -71,18 +72,18 @@ const UserContainer = (props) => {
           </div>
         </Card.Body>
       </Card>
-      {userHistory && (
+      {userAppointment && (
         <Card className="m-1">
           <Card.Title className="m-1">historial</Card.Title>
-          {userHistory?.history ? (
+          {userAppointment?.appointment ? (
             <Card.Body>
-              {userHistory?.history.title}
-              <ListHistory
-                infoList={userHistory?.history.appointment}
-              ></ListHistory>
+              {userAppointment?.appointment.title}
+              <ListAppointment
+                infoList={userAppointment?.appointment}
+              ></ListAppointment>
             </Card.Body>
           ) : (
-            <p>{userHistory?.message}</p>
+            <p>{userAppointment?.message}</p>
           )}
         </Card>
       )}

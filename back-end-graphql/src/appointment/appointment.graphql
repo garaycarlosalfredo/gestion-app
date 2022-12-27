@@ -1,0 +1,41 @@
+# import errorResponse from "../errorHandle/error.graphql"
+
+scalar Date
+
+type Appointment {
+  user: String
+  title: String
+  description: String
+  createDate: Date
+  updated: Date
+  tags: [String]
+}
+
+input AppointmentUpdated {
+  userId: String
+  title: String
+  description: String
+  createDate: Date
+  updated: Date
+  tags: [String]
+}
+
+input userIdInput {
+  userId: String
+}
+
+type Mutation {
+  updateAppointment(input: AppointmentUpdated): appointmentResponse
+  getUserAppointments(input: userIdInput): appointmentsResponse
+}
+
+type appointmentSuccessResponse {
+  appointment: Appointment
+}
+
+type appointmentsSuccessResponse {
+  appointment: [Appointment]
+}
+
+union appointmentsResponse = appointmentsSuccessResponse | errorResponse
+union appointmentResponse = appointmentSuccessResponse | errorResponse

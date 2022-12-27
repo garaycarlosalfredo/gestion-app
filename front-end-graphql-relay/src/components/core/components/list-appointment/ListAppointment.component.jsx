@@ -1,6 +1,6 @@
 import Table from "react-bootstrap/Table";
 
-function ListHistory({ infoList }) {
+function ListAppointment({ infoList }) {
   console.log("infoList", infoList);
   return (
     <Table striped bordered hover>
@@ -14,8 +14,8 @@ function ListHistory({ infoList }) {
         {infoList.map((info) => {
           return (
             <tr>
-              <td>{info.date}</td>
-              <td>{info.information}</td>
+              <td>{info.updated}</td>
+              <td>{info.description}</td>
             </tr>
           );
         })}
@@ -24,4 +24,4 @@ function ListHistory({ infoList }) {
   );
 }
 
-export default ListHistory;
+export default ListAppointment;

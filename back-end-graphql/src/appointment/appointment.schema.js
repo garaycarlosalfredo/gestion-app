@@ -1,11 +1,6 @@
 const mongoose = require("mongoose");
 
-const HistorySchema = mongoose.Schema({
-  _id: {
-    type: mongoose.ObjectId,
-    required: true,
-    alias: "String",
-  },
+const AppointmentSchema = mongoose.Schema({
   userId: {
     type: String,
     required: true,
@@ -23,20 +18,6 @@ const HistorySchema = mongoose.Schema({
     required: true,
     alias: "String",
   },
-  appointment: [
-    {
-      date: {
-        type: Date,
-        default: Date.now(),
-        alias: "Date",
-      },
-      information: {
-        type: String,
-        required: true,
-        alias: "String",
-      },
-    },
-  ],
   createDate: {
     type: Date,
     default: Date.now(),
@@ -57,4 +38,4 @@ const HistorySchema = mongoose.Schema({
   ],
 });
 
-module.exports = mongoose.model("History", HistorySchema);
+module.exports = mongoose.model("Appointment", AppointmentSchema);

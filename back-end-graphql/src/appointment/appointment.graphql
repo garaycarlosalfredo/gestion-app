@@ -3,7 +3,8 @@
 scalar Date
 
 type Appointment {
-  user: String
+  _id: String
+  userId: String
   title: String
   description: String
   createDate: Date
@@ -12,11 +13,10 @@ type Appointment {
 }
 
 input AppointmentUpdated {
+  _id: String
   userId: String
   title: String
   description: String
-  createDate: Date
-  updated: Date
   tags: [String]
 }
 

@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<3d1e055fffb54afa7d9145327d53cc6e>>
+ * @generated SignedSource<<e320a1b8c8f187d41aa594b09e3fc4f1>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -32,13 +32,13 @@ v2 = {
       "concreteType": "Appointment",
       "kind": "LinkedField",
       "name": "appointment",
-      "plural": true,
+      "plural": false,
       "selections": [
         {
           "alias": null,
           "args": null,
           "kind": "ScalarField",
-          "name": "user",
+          "name": "userId",
           "storageKey": null
         },
         {
@@ -59,28 +59,21 @@ v2 = {
           "alias": null,
           "args": null,
           "kind": "ScalarField",
-          "name": "createDate",
-          "storageKey": null
-        },
-        {
-          "alias": null,
-          "args": null,
-          "kind": "ScalarField",
-          "name": "updated",
-          "storageKey": null
-        },
-        {
-          "alias": null,
-          "args": null,
-          "kind": "ScalarField",
           "name": "tags",
+          "storageKey": null
+        },
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "_id",
           "storageKey": null
         }
       ],
       "storageKey": null
     }
   ],
-  "type": "appointmentsSuccessResponse",
+  "type": "appointmentSuccessResponse",
   "abstractKey": null
 },
 v3 = {
@@ -109,7 +102,7 @@ return {
         "args": (v1/*: any*/),
         "concreteType": null,
         "kind": "LinkedField",
-        "name": "getUserAppointments",
+        "name": "updateAppointment",
         "plural": false,
         "selections": [
           (v2/*: any*/),
@@ -132,7 +125,7 @@ return {
         "args": (v1/*: any*/),
         "concreteType": null,
         "kind": "LinkedField",
-        "name": "getUserAppointments",
+        "name": "updateAppointment",
         "plural": false,
         "selections": [
           {
@@ -150,16 +143,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "539dec784f10f21b78e896e255cef845",
+    "cacheID": "1d49730bcf095983614a05e32ebdc8d3",
     "id": null,
     "metadata": {},
     "name": "UpdateUserAppointmentMutation",
     "operationKind": "mutation",
-    "text": "mutation UpdateUserAppointmentMutation(\n  $input: userIdInput\n) {\n  getUserAppointments(input: $input) {\n    __typename\n    ... on appointmentsSuccessResponse {\n      appointment {\n        user\n        title\n        description\n        createDate\n        updated\n        tags\n      }\n    }\n    ... on errorResponse {\n      message\n    }\n  }\n}\n"
+    "text": "mutation UpdateUserAppointmentMutation(\n  $input: AppointmentUpdated\n) {\n  updateAppointment(input: $input) {\n    __typename\n    ... on appointmentSuccessResponse {\n      appointment {\n        userId\n        title\n        description\n        tags\n        _id\n      }\n    }\n    ... on errorResponse {\n      message\n    }\n  }\n}\n"
   }
 };
 })();
 
-node.hash = "343251e13f8e50a15b8c2605577065dc";
+node.hash = "d6a34d058970d21540f184cee5a896d7";
 
 module.exports = node;

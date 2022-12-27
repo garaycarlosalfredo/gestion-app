@@ -8,22 +8,13 @@ exports.updateAppointment = async (root, args) => {
   //(TODO) check errors
 
   try {
-    const { userId } = input;
-    let appointment = await Appointment.findOne({ userId });
-
-    if (appointment) {
-      appointment.title = input.title;
-      appointment.description = input.description;
-      appointment.tags = input.tags;
-    } else {
-      appointment = new Appointment(input);
-      appointment.createDate = Date.now();
-    }
-
-    appointment.updated = Date.now();
-    await appointment.save();
-
-    return { appointment };
+    const { _id, userId, title, description, tags } = input;
+    let appointment = await Appointment.findOneAndUpdate(
+      { _id },
+      { userId, updated: Date.now(), title, description, tags }
+    );
+    console.info("appointment", appointment);
+    return appointment ? { appointment } : { message: "error u" };
   } catch (error) {
     console.log(
       "error al intentar actualizar el historial del un usuario : ",

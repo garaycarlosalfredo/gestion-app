@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<619f86efa77c20c0e0b395ea72c50776>>
+ * @generated SignedSource<<fbf08a85dc62afc91ac8b2bf1bdfebf1>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -38,7 +38,14 @@ v2 = {
           "alias": null,
           "args": null,
           "kind": "ScalarField",
-          "name": "user",
+          "name": "_id",
+          "storageKey": null
+        },
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "userId",
           "storageKey": null
         },
         {
@@ -150,16 +157,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "f680c75221851811705680db481fbd36",
+    "cacheID": "feb31a24ee33e95e9d66c714eaae660f",
     "id": null,
     "metadata": {},
     "name": "GetUserAppointmentsMutation",
     "operationKind": "mutation",
-    "text": "mutation GetUserAppointmentsMutation(\n  $input: userIdInput\n) {\n  getUserAppointments(input: $input) {\n    __typename\n    ... on appointmentsSuccessResponse {\n      appointment {\n        user\n        title\n        description\n        createDate\n        updated\n        tags\n      }\n    }\n    ... on errorResponse {\n      message\n    }\n  }\n}\n"
+    "text": "mutation GetUserAppointmentsMutation(\n  $input: userIdInput\n) {\n  getUserAppointments(input: $input) {\n    __typename\n    ... on appointmentsSuccessResponse {\n      appointment {\n        _id\n        userId\n        title\n        description\n        createDate\n        updated\n        tags\n      }\n    }\n    ... on errorResponse {\n      message\n    }\n  }\n}\n"
   }
 };
 })();
 
-node.hash = "34483ac572b4604cf8d52c3ba5a5348d";
+node.hash = "5265ee8458cbd98f9b0c84dade818fff";
 
 module.exports = node;

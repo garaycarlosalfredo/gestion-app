@@ -6,7 +6,8 @@ const mutation = graphql`
     getUserAppointments(input: $input) {
       ... on appointmentsSuccessResponse {
         appointment {
-          user
+          _id
+          userId
           title
           description
           createDate

@@ -2,16 +2,15 @@ import graphql from "babel-plugin-relay/macro";
 import { commitMutation } from "react-relay";
 
 const mutation = graphql`
-  mutation UpdateUserAppointmentMutation($input: userIdInput) {
-    getUserAppointments(input: $input) {
-      ... on appointmentsSuccessResponse {
+  mutation UpdateUserAppointmentMutation($input: AppointmentUpdated) {
+    updateAppointment(input: $input) {
+      ... on appointmentSuccessResponse {
         appointment {
-          user
+          userId
           title
           description
-          createDate
-          updated
           tags
+          _id
         }
       }
       ... on errorResponse {
